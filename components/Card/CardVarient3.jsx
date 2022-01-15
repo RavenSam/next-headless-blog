@@ -6,7 +6,7 @@ import { HiOutlineDotsHorizontal, HiOutlineShare } from "react-icons/hi"
 export default function CardVarient3({ post }) {
    return (
       <Link href="#1">
-         <a className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row">
+         <a className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row ">
             <div className="overflow-hidden img rounded-xl">
                <Image
                   className="w-full rounded-xl transform group-hover:scale-110 transition duration-500"
@@ -19,7 +19,7 @@ export default function CardVarient3({ post }) {
             </div>
 
             <div className="max-w-sm space-y-5">
-               <div className="flex items-center text-xs sm:text-sm flex-wrap text-gray-500 space-x-2">
+               <div className="flex items-center text-xs sm:text-sm flex-wrap text-gray-500 dark:text-gray-300 space-x-2">
                   <Image
                      className="w-full rounded-full "
                      src={post.author.photo}
@@ -52,10 +52,12 @@ export default function CardVarient3({ post }) {
                      {trancate(post.title, 30)}
                   </h2>
 
-                  <p className="text-gray-600 text-sm font-medium">{trancate(post.description, 100)}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">
+                     {trancate(post.description, 100)}
+                  </p>
                </div>
 
-               <div className="flex items-center justify-between text-sm text-gray-500 ">
+               <div className="flex items-center justify-between text-sm text-gray-500  dark:text-gray-300">
                   <span>
                      <HiOutlineShare size={20} />
                   </span>

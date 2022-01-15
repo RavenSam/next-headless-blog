@@ -1,3 +1,6 @@
+import { ThemeProvider } from "next-themes"
+import NextNprogress from "nextjs-progressbar"
+
 // Styles
 import "../styles/globals.css"
 
@@ -8,9 +11,13 @@ function MyApp({ Component, pageProps }) {
    const Layout = Component.layout || DefaultLayout
 
    return (
-      <Layout>
-         <Component {...pageProps} />
-      </Layout>
+      <ThemeProvider attribute="class">
+         <NextNprogress options={{ showSpinner: false }} color="#188ec2" />
+
+         <Layout>
+            <Component {...pageProps} />
+         </Layout>
+      </ThemeProvider>
    )
 }
 

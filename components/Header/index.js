@@ -1,5 +1,5 @@
 import Link from "next/link"
-import Button from "../elements/Button"
+import ThemeToggle from "../ThemeToggle"
 
 const navLists = [
    { title: "home", href: "/" },
@@ -11,7 +11,7 @@ const navLists = [
 export default function Header() {
    return (
       <header className="w-full ">
-         <div className="w-full max-w-6xl mx-auto flex items-center justify-between py-4">
+         <div className="w-full max-w-6xl mx-auto flex items-center justify-between py-4 px-2">
             <div>
                <h2 className="text-3xl font-bold">LOGO</h2>
             </div>
@@ -19,11 +19,11 @@ export default function Header() {
             <nav className="flex items-center space-x-2">
                {navLists.map((list) => (
                   <Link href={list.href} key={list.title}>
-                     <a className="text-sm">
-                        <Button>{list.title}</Button>
-                     </a>
+                     <a className="btn-ghost text-sm">{list.title}</a>
                   </Link>
                ))}
+
+               <ThemeToggle />
             </nav>
          </div>
       </header>

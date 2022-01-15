@@ -1,6 +1,5 @@
 import { HiAdjustments } from "react-icons/hi"
 import Card from "../components/Card"
-import Button from "../components/elements/Button"
 
 const posts = [
    {
@@ -47,17 +46,13 @@ const posts = [
    //    author: { name: "Techie Coder", photo: "/images/tren-lg-2.jpg" },
    // },
 ]
-
 export default function Home() {
    return (
       <div className="h-screen w-full flex items-center justify-center">
          <div className="flex items-center space-x-6">
-            <Button varient="ghost">Ghost</Button>
-            <Button varient="primary">Primary</Button>
-            <Button varient="secondary">Secondary</Button>
-            <Button varient="icon">
-               <HiAdjustments size={20} />
-            </Button>
+            {posts.map((p) => (
+               <Card key={p.id} post={p} varient={1} />
+            ))}
          </div>
       </div>
    )

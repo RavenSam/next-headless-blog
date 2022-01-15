@@ -20,13 +20,13 @@ export default function CardVarient1({ post }) {
 
                <div className="absolute top-5 left-5">
                   <Link href="#2">
-                     <a className="bg-gradient-to-r from-sky-300 to-sky-500 text-white text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
+                     <a className="bg-gradient-to-l from-sky-300 to-sky-500 text-white font-semibold text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
                         {post.category}
                      </a>
                   </Link>
                </div>
 
-               <div className="flex items-center text-sm mt-2 text-gray-500 space-x-2">
+               <div className="flex items-center text-sm mt-2 text-gray-500 dark:text-gray-300 space-x-2">
                   <Image
                      className="w-full rounded-full"
                      src={post.author.photo}
@@ -51,7 +51,9 @@ export default function CardVarient1({ post }) {
                   >
                      {trancate(post.title, 30)}
                   </h2>
-                  <p className="text-gray-600 text-sm font-medium">{trancate(post.description, 120)}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">
+                     {trancate(post.description, 120)}
+                  </p>
                </div>
             </a>
          </Link>

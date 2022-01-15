@@ -22,7 +22,7 @@ export default function CardVarient2({ post }) {
 
                <div className="absolute inset-0 h-full flex flex-col justify-end p-[8%]">
                   <Link href="#2">
-                     <a className="w-min bg-gradient-to-r from-sky-300 to-sky-500 text-white text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
+                     <a className="w-min bg-gradient-to-l from-sky-300 to-sky-500  font-semibold text-white text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
                         {post.category}
                      </a>
                   </Link>

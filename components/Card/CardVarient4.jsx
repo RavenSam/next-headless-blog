@@ -45,7 +45,7 @@ export default function CardVarient4({ post, round, num }) {
                      {trancate(post.title, 30)}
                   </h2>
 
-                  <p className="text-gray-600 text-sm">{post.created_at}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm ">{post.created_at}</p>
                </div>
             </div>
          </a>

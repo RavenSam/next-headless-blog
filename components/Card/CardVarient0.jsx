@@ -20,7 +20,7 @@ export default function CardVarient0({ post }) {
 
                <div className="absolute top-5 left-5">
                   <Link href="#2">
-                     <a className="bg-gradient-to-r from-sky-300 to-sky-500 text-white text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
+                     <a className="bg-gradient-to-l from-sky-300 to-sky-500 text-white font-semibold  text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
                         {post.category}
                      </a>
                   </Link>
@@ -35,7 +35,7 @@ export default function CardVarient0({ post }) {
                   </h2>
                </div>
 
-               <div className="flex items-center text-sm text-gray-500 space-x-2">
+               <div className="flex items-center text-sm text-gray-500 dark:text-gray-300 space-x-2">
                   <Link href="#3">
                      <a className="hover:text-sky-500">{post.author.name}</a>
                   </Link>
