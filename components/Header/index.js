@@ -1,11 +1,11 @@
-import Link from "next/link"
-import ThemeToggle from "../ThemeToggle"
+import NavbarMD from "./NavbarMD"
+import NavbarSM from "./NavbarSM"
 
 const navLists = [
    { title: "home", href: "/" },
-   { title: "latest", href: "/" },
-   { title: "about us", href: "/" },
-   { title: "contact", href: "/" },
+   { title: "latest", href: "/latest" },
+   { title: "about us", href: "/about" },
+   { title: "contact", href: "/contact" },
 ]
 
 export default function Header() {
@@ -16,15 +16,13 @@ export default function Header() {
                <h2 className="text-3xl font-bold">LOGO</h2>
             </div>
 
-            <nav className="flex items-center space-x-2">
-               {navLists.map((list) => (
-                  <Link href={list.href} key={list.title}>
-                     <a className="btn-ghost text-sm">{list.title}</a>
-                  </Link>
-               ))}
+            <div className="hidden md:block">
+               <NavbarMD navLists={navLists} />
+            </div>
 
-               <ThemeToggle />
-            </nav>
+            <div className="md:hidden">
+               <NavbarSM navLists={navLists} />
+            </div>
          </div>
       </header>
    )
