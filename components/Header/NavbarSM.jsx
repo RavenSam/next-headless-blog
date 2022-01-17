@@ -15,7 +15,7 @@ export default function NavbarSM({ navLists }) {
 
    return (
       <Drawer>
-         <div className="h-full flex flex-col">
+         <div className="h-full flex flex-col space-y-6">
             {logged ? (
                <div className="group flex items-center  space-x-4 ">
                   <div className="relative img">
@@ -38,26 +38,18 @@ export default function NavbarSM({ navLists }) {
                   </div>
                </div>
             ) : (
-               <div className="flex items-center justify-center space-x-2 text-xs sm:text-sm">
-                  <Link href="/">
-                     <a className="btn-primary">Login</a>
+               <div className="flex flex-col items-center justify-center space-y-2 text-sm">
+                  <Link href="/login">
+                     <a className="btn-primary w-full justify-center">Login</a>
                   </Link>
 
-                  <Link href="/">
-                     <a className="btn-secondary">Sign Up</a>
+                  <Link href="/sign-up">
+                     <a className="btn-secondary w-full justify-center">Sign Up</a>
                   </Link>
                </div>
             )}
 
-            <nav className="flex flex-col text-sm space-y-1 mt-10">
-               {navLists.map((list) => (
-                  <Link href={list.href} key={list.title}>
-                     <a className={`btn-ghost ${list.href === pathname && "!text-sky-500"}`}>{list.title}</a>
-                  </Link>
-               ))}
-            </nav>
-
-            <div className=" p-1 mt-auto">
+            <div className=" p-1">
                <div className="flex items-center justify-evenly ">
                   <ThemeToggle />
 
@@ -72,6 +64,14 @@ export default function NavbarSM({ navLists }) {
                   )}
                </div>
             </div>
+
+            <nav className="flex flex-col text-sm space-y-1">
+               {navLists.map((list) => (
+                  <Link href={list.href} key={list.title}>
+                     <a className={`btn-ghost ${list.href === pathname && "!text-sky-500"}`}>{list.title}</a>
+                  </Link>
+               ))}
+            </nav>
          </div>
       </Drawer>
    )

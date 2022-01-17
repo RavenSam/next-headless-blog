@@ -13,7 +13,7 @@ export default function Dropdown({ title, children, round, img }) {
                   <HiChevronDown size={20} aria-hidden="true" />
                </Menu.Button>
             ) : img ? (
-               <Menu.Button className="relative img">
+               <Menu.Button className="relative img focus:ring-2 focus:outline-none focus:ring-sky-500 rounded-full">
                   <Image
                      className="w-full rounded-full "
                      src={img}
@@ -38,7 +38,7 @@ export default function Dropdown({ title, children, round, img }) {
                leaveFrom="transform opacity-100 scale-100"
                leaveTo="transform opacity-0 scale-95"
             >
-               <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900">
+               <Menu.Items className="absolute right-0 w-56 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-xl shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-900 z-10">
                   {children}
                </Menu.Items>
             </Transition>

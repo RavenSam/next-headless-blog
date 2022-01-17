@@ -1,8 +1,10 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { HiOutlineLogin, HiOutlineLogout } from "react-icons/hi"
+import { HiOutlineLogout, HiOutlineSearch } from "react-icons/hi"
+import SearchModal from "../SearchModal"
 import Dropdown from "../shared/Dropdown"
+import Modal from "../shared/Modal"
 import ThemeToggle from "../ThemeToggle"
 
 export default function NavbarMD({ navLists }) {
@@ -20,6 +22,8 @@ export default function NavbarMD({ navLists }) {
                </Link>
             ))}
          </nav>
+
+         <SearchModal />
 
          {logged ? (
             <Dropdown round img="/images/user.jpg">
