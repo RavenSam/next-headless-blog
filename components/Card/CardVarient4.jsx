@@ -1,20 +1,25 @@
 import Image from "next/image"
 import Link from "next/link"
+import imageUrl from "../../utils/imageUrl"
 import trancate from "../../utils/trancate"
 
 export default function CardVarient4({ post, round, num }) {
+   const m = imageUrl(post.featuredImage, "thumbnail")
+
+   console.log(m)
+
    return (
       <div className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row">
          {round ? (
             <div className="relative img">
-               <Image
+               {/* <Image
                   className="w-full rounded-full"
-                  src={post.image}
+                  src={`${process.env.NEXT_PUBLIC_API_URL}${post.featuredImage.data.attributes.formats.thumbnail.url}`}
                   alt={post.title}
                   width={60}
                   height={60}
                   objectFit="cover"
-               />
+               /> */}
 
                {num && (
                   <span className="absolute -top-1 -left-1 text-white text-center leading-[2rem] w-8 h-8 rounded-full bg-sky-500 border border-white">
@@ -42,7 +47,7 @@ export default function CardVarient4({ post, round, num }) {
                      title={post.title}
                      className="font-bold text-lg mb-2 group-hover:text-sky-500 transition duration-500"
                   >
-                     {trancate(post.title, 20)}
+                     {trancate(post.title, 30)}
                   </a>
                </Link>
 
