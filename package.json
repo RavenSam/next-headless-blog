@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
+    "marked": "^4.0.10",
     "moment": "^2.29.1",
     "next": "12.0.8",
     "next-themes": "^0.0.15",
@@ -19,6 +20,7 @@
     "react-query": "^3.34.8"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.0",
     "autoprefixer": "^10.4.2",
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",

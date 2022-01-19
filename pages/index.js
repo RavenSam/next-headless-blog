@@ -3,8 +3,6 @@ import Card from "../components/Card"
 import TabsPosts from "../components/TabsPosts"
 
 export default function Home({ hotArticles, recommandedArticles }) {
-   console.log(hotArticles)
-
    return (
       <div className="xlContainer px-2 mt-10">
          <section className="grid grid-cols-1 sm:grid-cols-12 gap-4">

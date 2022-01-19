@@ -45,7 +45,7 @@ export default function CardVarient1({ post }) {
             </div>
 
             <div className="py-4">
-               <Link href="#3">
+               <Link href={`/post/${post.slug}`}>
                   <a
                      title={post.title}
                      className="font-bold text-lg sm:text-xl mb-2 transition duration-500 group-hover:text-sky-500"
