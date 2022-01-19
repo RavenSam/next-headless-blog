@@ -1,9 +1,16 @@
 import Head from "next/head"
 import { marked } from "marked"
 import Image from "next/image"
+import { useRouter } from "next/router"
+import Loading from "../../components/Loading"
 
 export default function Post({ data }) {
+   const router = useRouter()
    const html = marked.parse(data.attributes.content)
+
+   if (router.isFallback) {
+      return <Loading />
+   }
 
    return (
       <>
@@ -50,6 +57,7 @@ export async function getStaticProps({ params }) {
       props: {
          data: data[0],
       },
+      revalidate: 10,
    }
 }
 
@@ -58,11 +66,11 @@ export async function getStaticPaths() {
    const { data } = await articlesSlugs.json()
 
    const paths = data.map((el) => {
-      return { params: { slug: el.attributes.slug.toString() } }
+      return { params: { slug: el?.attributes.slug.toString() } }
    })
 
    return {
       paths,
-      fallback: true,
+      fallback: "blocking",
    }
 }

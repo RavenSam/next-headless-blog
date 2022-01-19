@@ -1,6 +1,6 @@
 export default function Loading() {
    return (
-      <div className=" flex items-center justify-center w-full h-full flex-1">
+      <div className=" flex items-center justify-center w-full h-[70vh] flex-1">
          <Spinner />
       </div>
    )
