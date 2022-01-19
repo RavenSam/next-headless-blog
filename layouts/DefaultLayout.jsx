@@ -12,7 +12,8 @@ export default function DefaultLayout({ children }) {
    return (
       <>
          <Head>
-            <title>Blog</title>
+            <title>SiSky</title>
+            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
          </Head>
 
          {!pageWithNoNav.includes(pathname) && <Header />}

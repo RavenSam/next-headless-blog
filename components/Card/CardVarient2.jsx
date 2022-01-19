@@ -18,7 +18,7 @@ export default function CardVarient2({ post }) {
                />
             </div>
 
-            <div className="absolute inset-0 bg-sky-900 bg-opacity-50" />
+            <div className="absolute inset-0 bg-black bg-opacity-50" />
 
             <div className="absolute inset-0 h-full flex flex-col justify-end p-[8%]">
                <Link href="#2">
