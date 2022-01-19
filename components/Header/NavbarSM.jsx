@@ -8,7 +8,7 @@ import { useRouter } from "next/router"
 import { HiOutlineCog, HiOutlineLogout } from "react-icons/hi"
 
 export default function NavbarSM({ navLists }) {
-   const [logged, setLogged] = useState(true)
+   const [logged, setLogged] = useState(false)
    const { pathname } = useRouter()
 
    const handleLogOut = () => setLogged(false)

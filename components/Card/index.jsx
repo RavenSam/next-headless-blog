@@ -3,8 +3,9 @@ import CardVarient1 from "./CardVarient1"
 import CardVarient2 from "./CardVarient2"
 import CardVarient3 from "./CardVarient3"
 import CardVarient4 from "./CardVarient4"
+import CardVarient5 from "./CardVarient5"
 
-export default function Card({ varient, post, round, num }) {
+export default function Card({ varient, post, num }) {
    switch (varient) {
       case 0:
          return <CardVarient0 post={post} />
@@ -19,7 +20,10 @@ export default function Card({ varient, post, round, num }) {
          return <CardVarient3 post={post} />
 
       case 4:
-         return <CardVarient4 post={post} round={round || false} num={num || false} />
+         return <CardVarient4 post={post} num={num || false} />
+
+      case 5:
+         return <CardVarient5 post={post} />
 
       default:
          return <CardVarient0 post={post} />

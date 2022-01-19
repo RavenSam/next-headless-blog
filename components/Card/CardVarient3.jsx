@@ -9,7 +9,7 @@ export default function CardVarient3({ post }) {
          <div className="overflow-hidden img rounded-xl">
             <Image
                className="w-full rounded-xl transform group-hover:scale-110 transition duration-500"
-               src={post.image}
+               src={post.featuredImage.data.attributes.formats.thumbnail.url}
                alt={post.title}
                width={280}
                height={190}
@@ -18,7 +18,7 @@ export default function CardVarient3({ post }) {
          </div>
 
          <div className="max-w-sm space-y-5">
-            <div className="flex items-center text-xs sm:text-sm flex-wrap text-gray-500 dark:text-gray-300 space-x-2">
+            {/* <div className="flex items-center text-xs sm:text-sm flex-wrap text-gray-500 dark:text-gray-300 space-x-2">
                <Image
                   className="w-full rounded-full "
                   src={post.author.photo}
@@ -41,7 +41,7 @@ export default function CardVarient3({ post }) {
                <span>&#8226;</span>
 
                <span>{post.created_at}</span>
-            </div>
+            </div> */}
 
             <div className="">
                <Link href="#4">

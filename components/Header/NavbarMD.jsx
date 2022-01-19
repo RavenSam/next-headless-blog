@@ -8,7 +8,7 @@ import Modal from "../shared/Modal"
 import ThemeToggle from "../ThemeToggle"
 
 export default function NavbarMD({ navLists }) {
-   const [logged, setLogged] = useState(true)
+   const [logged, setLogged] = useState(false)
    const { pathname } = useRouter()
 
    const handleLogOut = () => setLogged(false)

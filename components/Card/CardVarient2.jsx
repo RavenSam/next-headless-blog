@@ -1,3 +1,4 @@
+import moment from "moment"
 import Image from "next/image"
 import Link from "next/link"
 import trancate from "../../utils/trancate"
@@ -9,7 +10,7 @@ export default function CardVarient2({ post }) {
             <div className=" img w-full overflow-hidden rounded-xl ">
                <Image
                   className="w-full rounded-xl transform group-hover:scale-110 transition duration-500 "
-                  src={post.image}
+                  src={post.featuredImage.data.attributes.formats.medium.url}
                   alt={post.title}
                   width={500}
                   height={400}
@@ -21,27 +22,28 @@ export default function CardVarient2({ post }) {
 
             <div className="absolute inset-0 h-full flex flex-col justify-end p-[8%]">
                <Link href="#2">
-                  <a className="w-min bg-gradient-to-l from-sky-300 to-sky-500  font-semibold text-white text-xs rounded-full px-4 py-2 opacity-80 hover:opacity-100">
-                     {post.category}
+                  <a className="font-medium border border-white bg-black bg-opacity-30 text-white w-min px-4 py-1 rounded-md capitalize hover:text-sky-500 hover:border-sky-500">
+                     {post.category.data.attributes.name}
                   </a>
                </Link>
 
                <div className="py-2">
-                  <Link href="#3">
-                     <a title={post.title} className="font-bold text-white text-lg sm:text-xl md:text-2xl">
+                  <Link href={`/post/${post.slug}`}>
+                     <a
+                        title={post.title}
+                        className="font-semibold sm:font-bold text-white text-base md:text-xl lg:text-2xl hover:text-sky-500 "
+                     >
                         {trancate(post.title, 30)}
                      </a>
                   </Link>
                </div>
 
                <div className="flex items-center text-sm text-gray-300 space-x-2">
-                  <Link href="#3">
-                     <a className="hover:text-sky-500">{post.author.name}</a>
-                  </Link>
+                  {/* <Link href="#3"><a className="hover:text-sky-500">{post.author.name}</a></Link> */}
 
                   <span>&#8226;</span>
 
-                  <span>{post.created_at}</span>
+                  <span>{moment(post.publishedAt).format("DD MMM YYYY")}</span>
                </div>
             </div>
          </div>
