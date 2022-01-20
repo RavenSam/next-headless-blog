@@ -1,4 +1,3 @@
-import Head from "next/head"
 import { marked } from "marked"
 import Image from "next/image"
 import { useRouter } from "next/router"
@@ -16,6 +15,7 @@ import { useState } from "react"
 import Link from "next/link"
 import moment from "moment"
 import PostComments from "../../components/PostComments"
+import { NextSeo } from "next-seo"
 
 export default function Post({ data }) {
    const router = useRouter()
@@ -36,18 +36,65 @@ export default function Post({ data }) {
       setBookmarkedPost(!bookmarkedPost)
    }
 
+   console.log(data.attributes)
+   // console.log(window.location.href)
+
    return (
       <>
-         <Head>
-            <title>{data?.attributes.title}</title>
-         </Head>
+         <NextSeo
+            title={data?.attributes.title}
+            description={data?.attributes.description}
+            canonical={window.location.href}
+            openGraph={{
+               url: "https://sisky.vercel.app/",
+               title: data?.attributes.title,
+               description: data?.attributes.description,
+               type: "website",
+               images: [
+                  {
+                     url: data?.attributes.featuredImage.data.attributes.formats.large.url,
+                     width: data?.attributes.featuredImage.data.attributes.formats.large.width,
+                     height: data?.attributes.featuredImage.data.attributes.formats.large.height,
+                     alt: data?.attributes.title,
+                     type: data?.attributes.featuredImage.data.attributes.formats.large.mime,
+                  },
+                  {
+                     url: data?.attributes.featuredImage.data.attributes.formats.medium.url,
+                     width: data?.attributes.featuredImage.data.attributes.formats.medium.width,
+                     height: data?.attributes.featuredImage.data.attributes.formats.medium.height,
+                     alt: data?.attributes.title,
+                     type: data?.attributes.featuredImage.data.attributes.formats.medium.mime,
+                  },
+                  {
+                     url: data?.attributes.featuredImage.data.attributes.formats.small.url,
+                     width: data?.attributes.featuredImage.data.attributes.formats.small.width,
+                     height: data?.attributes.featuredImage.data.attributes.formats.small.height,
+                     alt: data?.attributes.title,
+                     type: data?.attributes.featuredImage.data.attributes.formats.small.mime,
+                  },
+                  {
+                     url: data?.attributes.featuredImage.data.attributes.formats.thumbnail.url,
+                     width: data?.attributes.featuredImage.data.attributes.formats.thumbnail.width,
+                     height: data?.attributes.featuredImage.data.attributes.formats.thumbnail.height,
+                     alt: data?.attributes.title,
+                     type: data?.attributes.featuredImage.data.attributes.formats.thumbnail.mime,
+                  },
+               ],
+               site_name: "sisky",
+               article: {
+                  tags: data?.attributes.tags.data,
+                  publishedTime: data?.attributes.publishedAt,
+                  modifiedTime: data?.attributes.updatedAt,
+               },
+            }}
+         />
 
          <div className="p-2">
             <div className="relative overflow-hidden rounded-xl">
-               <div className="img overflow-hidden rounded-xl h-[55vh] sm:h-[70vh] md:h-[80vh]">
+               <div className="img relative overflow-hidden rounded-xl h-[55vh] sm:h-[70vh] md:h-[80vh]">
                   <Image
                      className="w-full rounded-xl "
-                     src={data.attributes.featuredImage.data.attributes.formats.large.url}
+                     src={data.attributes.featuredImage.data.attributes.url}
                      alt={data.attributes.title}
                      layout="fill"
                      objectFit="cover"

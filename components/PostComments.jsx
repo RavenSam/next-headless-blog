@@ -1,6 +1,8 @@
 import Image from "next/image"
 import { HiDotsHorizontal, HiThumbUp } from "react-icons/hi"
 import { GoReply } from "react-icons/go"
+import { useState } from "react"
+import Link from "next/link"
 
 const comments = [
    { name: "john Doe", content: "Lorem ipsum dolor sit amet consectetur adipisicing elit." },
@@ -16,11 +18,41 @@ const comments = [
 ]
 
 export default function PostComments() {
+   const [logged, setLogged] = useState(false)
+
    return (
       <>
          <h2 className="font-semibold text-xl md:text-2xl ">
             Comments <span className="text-sky-500">28</span>
          </h2>
+
+         {logged ? (
+            <div className="flex gap-4 my-8 p-4">
+               <div className="img min-w-[60]">
+                  <Image src="/images/user.jpg" alt="user" width={60} height={60} className="rounded-full" />
+               </div>
+
+               <div className="flex-1 space-y-4">
+                  <textarea
+                     className="input"
+                     placeholder="Type your comment here..."
+                     name="comment"
+                     id="comment"
+                  ></textarea>
+
+                  <button className="btn-secondary ml-auto">Submit</button>
+               </div>
+            </div>
+         ) : (
+            <div className="p-4 my-6">
+               <p className="text-gray-600  dark:text-gray-400">
+                  You need to loggin to be abble to comment.
+                  <Link href="/login">
+                     <a className="text-sky-500 font-semibold p-2">Login Now</a>
+                  </Link>
+               </p>
+            </div>
+         )}
 
          {/* ******     COMMENTS    ****** */}
          <div className="my-6 space-y-2">
