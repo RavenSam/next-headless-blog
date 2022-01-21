@@ -1,15 +1,43 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { BsEyeFill, BsEnvelope, BsKey, BsEyeSlashFill, BsArrowLeft } from "react-icons/bs"
+import { BsEyeFill, BsEnvelope, BsKey, BsEyeSlashFill, BsArrowLeft, BsFacebook } from "react-icons/bs"
 import { FcGoogle } from "react-icons/fc"
+import { useForm } from "react-hook-form"
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+
+const schema = yup.object().shape({
+   email: yup.string().email().required(),
+   password: yup.string().min(8).max(32).required(),
+})
+
+const inputs = [
+   { name: "email", label: "your email", type: "email", icon: BsEnvelope },
+   { name: "password", label: "your password", type: "password", icon: BsKey },
+]
 
 export default function Login() {
-   const [showPassword, setShowPassword] = useState(false)
+   const [showPassword, setShowPassword] = useState({ password: false })
+
    const { back } = useRouter()
 
-   const handleSubmit = (e) => {
-      e.preventDefault()
+   const {
+      register,
+      handleSubmit,
+      formState: { errors },
+      reset,
+   } = useForm({
+      resolver: yupResolver(schema),
+   })
+
+   const onSubmitHandler = (data) => {
+      console.log(data)
+      reset()
+   }
+
+   const handleShowPW = (name) => {
+      setShowPassword({ ...showPassword, [name]: !showPassword[name] })
    }
 
    return (
@@ -24,36 +52,56 @@ export default function Login() {
                   login<span className="text-sky-500">.</span>
                </h1>
 
-               <form className="space-y-5" onSubmit={handleSubmit}>
-                  <div className="space-y-2">
-                     <label htmlFor="email" className="text-sm font-medium flex items-center gap-2">
-                        <span className="text-sky-500 ">
-                           <BsEnvelope size={20} />
-                        </span>
-                        Your Email
-                     </label>
-                     <input className="input" type="email" name="email" />
+               <div className="space-y-2 mb-4">
+                  <div className="flex items-center gap-4">
+                     <button className="justify-center gap-4  w-full bg-white rounded-md py-4 btn border hover:opacity-80">
+                        <FcGoogle size={25} />
+                     </button>
+
+                     <button className="justify-center gap-4 text-white   bg-[#4267B2] w-full  rounded-md py-4 btn border hover:opacity-80">
+                        <BsFacebook size={25} />
+                     </button>
                   </div>
 
-                  <div className="space-y-2">
-                     <label htmlFor="password" className="text-sm font-medium flex items-center gap-2">
-                        <span className="text-sky-500 ">
-                           <BsKey size={20} />
-                        </span>
-                        Your Password
-                     </label>
-                     <div className="relative">
-                        <input className="input pr-12" type={showPassword ? "text" : "password"} name="password" />
+                  <div className="flex items-center justify-center">
+                     <hr className=" flex-1 dark:border-gray-600" />
+                     <span className="p-5 capitalize text-sm text-gray-700 darktext-gray-500 font-medium">or</span>
+                     <hr className="  flex-1 dark:border-gray-600" />
+                  </div>
+               </div>
 
-                        <button
-                           type="button"
-                           className="text-sky-500  h-full btn px-3 rounded-r-xl absolute top-1/2 right-0 transform  -translate-y-1/2 "
-                           onClick={() => setShowPassword(!showPassword)}
-                        >
-                           {showPassword ? <BsEyeFill size={20} /> : <BsEyeSlashFill size={20} />}
-                        </button>
+               <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
+                  {inputs.map((input, i) => (
+                     <div key={i} className="space-y-2">
+                        <label htmlFor={input.name} className="text-sm capitalize font-medium flex items-center gap-2">
+                           <span className="text-sky-500 ">
+                              <input.icon size={20} />
+                           </span>
+                           {input.label}
+                        </label>
+                        <div className="relative">
+                           <input
+                              className="input pr-12"
+                              name={input.name}
+                              {...register(input.name)}
+                              type={
+                                 input.type !== "password" ? input.type : showPassword[input.name] ? "text" : "password"
+                              }
+                           />
+
+                           {input.type === "password" && (
+                              <button
+                                 type="button"
+                                 className="text-sky-500  h-full btn px-3 rounded-r-xl absolute top-1/2 right-0 transform  -translate-y-1/2 "
+                                 onClick={() => handleShowPW(input.name)}
+                              >
+                                 {showPassword[input.name] ? <BsEyeFill size={20} /> : <BsEyeSlashFill size={20} />}
+                              </button>
+                           )}
+                        </div>
+                        <p className="text-pink-500 text-sm px-2">{errors[input.name]?.message}</p>
                      </div>
-                  </div>
+                  ))}
 
                   <div className="text-right">
                      <Link href="#">
@@ -61,23 +109,10 @@ export default function Login() {
                      </Link>
                   </div>
 
-                  <button type="submit" className="btn-primary text-sm mx-auto">
+                  <button type="submit" className="btn-primary mx-auto">
                      Login
                   </button>
                </form>
-
-               <div className="space-y-2">
-                  <div className="flex items-center justify-center">
-                     <hr className=" flex-1 dark:border-gray-600" />
-                     <span className="p-4">or</span>
-                     <hr className="  flex-1 dark:border-gray-600" />
-                  </div>
-
-                  <button className="justify-center gap-4  w-full bg-white rounded-md shadow-lg py-3 px-5 btn border opacity-70 hover:opacity-100">
-                     <FcGoogle size={25} />
-                     <span className="text-gray-700 darktext-gray-500 font-medium">Login With Google</span>
-                  </button>
-               </div>
             </div>
 
             <p className="text-sm text-center my-4 text-gray-600 dark:text-gray-400">
