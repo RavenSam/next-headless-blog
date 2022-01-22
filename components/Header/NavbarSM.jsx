@@ -6,12 +6,11 @@ import Image from "next/image"
 import trancate from "../../utils/trancate"
 import { useRouter } from "next/router"
 import { HiOutlineCog, HiOutlineLogout } from "react-icons/hi"
+import logout from "../../lib/logout"
 
 export default function NavbarSM({ navLists }) {
    const [logged, setLogged] = useState(false)
    const { pathname } = useRouter()
-
-   const handleLogOut = () => setLogged(false)
 
    return (
       <Drawer>
@@ -58,7 +57,7 @@ export default function NavbarSM({ navLists }) {
                   </button>
 
                   {logged && (
-                     <button className="btn-icon " onClick={handleLogOut}>
+                     <button className="btn-icon " onClick={logout}>
                         <HiOutlineLogout size={20} />
                      </button>
                   )}

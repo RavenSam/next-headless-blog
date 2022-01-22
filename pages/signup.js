@@ -5,6 +5,9 @@ import { BsEyeFill, BsEnvelope, BsKey, BsEyeSlashFill, BsArrowLeft, BsPerson } f
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import axios from "axios"
+import { Spinner } from "../components/Loading"
+import Cookies from "js-cookie"
 
 const inputs = [
    { name: "username", label: "username", type: "text", icon: BsPerson },
@@ -17,25 +20,26 @@ const schema = yup.object().shape({
    username: yup.string().min(4).max(32).required(),
    email: yup.string().email().required(),
    password: yup.string().min(8).max(32).required(),
-   password2: yup.string().oneOf([yup.ref("password1"), null], "passwords must match"),
+   password2: yup.string().oneOf([yup.ref("password"), null], "passwords must match"),
 })
 
 export default function SignUp() {
    const [showPassword, setShowPassword] = useState({ password: false, password2: false })
    const { back } = useRouter()
+   const { register, handleSubmit, setError, formState, reset } = useForm({ resolver: yupResolver(schema) })
+   const { errors, isSubmitting } = formState
 
-   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset,
-   } = useForm({
-      resolver: yupResolver(schema),
-   })
+   const onSubmitHandler = async (data) => {
+      try {
+         const res = await axios.post("/api/auth/register", { data })
 
-   const onSubmitHandler = (data) => {
-      console.log(data)
-      reset()
+         Cookies.set("user", JSON.stringify(res.data))
+
+         reset()
+      } catch (err) {
+         console.log(err.message)
+         setError("apiError", { message: "Something went wrong: Registration Failed" })
+      }
    }
 
    const handleShowPW = (name) => {
@@ -55,6 +59,8 @@ export default function SignUp() {
                </h1>
 
                <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
+                  <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p>
+
                   {inputs.map((input, i) => (
                      <div key={i} className="space-y-2">
                         <label htmlFor={input.name} className="text-sm capitalize font-medium flex items-center gap-2">
@@ -87,7 +93,8 @@ export default function SignUp() {
                      </div>
                   ))}
 
-                  <button type="submit" className="btn-primary mx-auto">
+                  <button type="submit" className="btn-primary mx-auto" disabled={isSubmitting}>
+                     {isSubmitting && <Spinner className="text-white !w-5 !h-5" />}
                      Sign Up
                   </button>
                </form>

@@ -6,6 +6,9 @@ import { FcGoogle } from "react-icons/fc"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import axios from "axios"
+import { Spinner } from "../components/Loading"
+import Cookies from "js-cookie"
 
 const schema = yup.object().shape({
    email: yup.string().email().required(),
@@ -19,21 +22,24 @@ const inputs = [
 
 export default function Login() {
    const [showPassword, setShowPassword] = useState({ password: false })
-
    const { back } = useRouter()
 
-   const {
-      register,
-      handleSubmit,
-      formState: { errors },
-      reset,
-   } = useForm({
-      resolver: yupResolver(schema),
-   })
+   const { register, handleSubmit, setError, formState, reset } = useForm({ resolver: yupResolver(schema) })
+   const { errors, isSubmitting } = formState
 
-   const onSubmitHandler = (data) => {
-      console.log(data)
-      reset()
+   const onSubmitHandler = async (data) => {
+      try {
+         const loginInfo = { identifier: data.email, password: data.password }
+
+         const res = await axios.post("/api/auth/login", { loginInfo })
+
+         Cookies.set("user", JSON.stringify(res.data))
+
+         reset()
+      } catch (err) {
+         console.log(err.message)
+         setError("apiError", { message: "Failed to Login: wrong email or password" })
+      }
    }
 
    const handleShowPW = (name) => {
@@ -71,6 +77,8 @@ export default function Login() {
                </div>
 
                <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
+                  <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p>
+
                   {inputs.map((input, i) => (
                      <div key={i} className="space-y-2">
                         <label htmlFor={input.name} className="text-sm capitalize font-medium flex items-center gap-2">
@@ -109,7 +117,8 @@ export default function Login() {
                      </Link>
                   </div>
 
-                  <button type="submit" className="btn-primary mx-auto">
+                  <button type="submit" className="btn-primary mx-auto" disabled={isSubmitting}>
+                     {isSubmitting && <Spinner className="text-white !w-5 !h-5" />}
                      Login
                   </button>
                </form>

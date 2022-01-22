@@ -1,17 +1,15 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { HiOutlineLogout, HiOutlineSearch } from "react-icons/hi"
+import { HiOutlineLogout } from "react-icons/hi"
+import logout from "../../lib/logout"
 import SearchModal from "../SearchModal"
 import Dropdown from "../shared/Dropdown"
-import Modal from "../shared/Modal"
 import ThemeToggle from "../ThemeToggle"
 
 export default function NavbarMD({ navLists }) {
-   const [logged, setLogged] = useState(false)
+   const [logged, setLogged] = useState(true)
    const { pathname } = useRouter()
-
-   const handleLogOut = () => setLogged(false)
 
    return (
       <div className="flex items-center space-x-2">
@@ -43,7 +41,7 @@ export default function NavbarMD({ navLists }) {
                   <div className="flex items-center justify-evenly ">
                      <ThemeToggle />
 
-                     <button className="btn-icon " onClick={handleLogOut}>
+                     <button className="btn-icon " onClick={logout}>
                         <HiOutlineLogout size={20} />
                      </button>
                   </div>
