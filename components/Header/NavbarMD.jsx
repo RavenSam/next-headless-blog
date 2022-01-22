@@ -1,14 +1,12 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useState } from "react"
 import { HiOutlineLogout } from "react-icons/hi"
 import logout from "../../lib/logout"
 import SearchModal from "../SearchModal"
 import Dropdown from "../shared/Dropdown"
 import ThemeToggle from "../ThemeToggle"
 
-export default function NavbarMD({ navLists }) {
-   const [logged, setLogged] = useState(true)
+export default function NavbarMD({ navLists, user }) {
    const { pathname } = useRouter()
 
    return (
@@ -23,7 +21,7 @@ export default function NavbarMD({ navLists }) {
 
          <SearchModal />
 
-         {logged ? (
+         {user ? (
             <Dropdown round img="/images/user.jpg">
                <div className="p-1 flex flex-col text-sm space-y-1">
                   <Link href="/login">
@@ -54,7 +52,7 @@ export default function NavbarMD({ navLists }) {
                      <a className="btn-ghost ">login</a>
                   </Link>
 
-                  <Link href="/sign-up">
+                  <Link href="/signup">
                      <a className="btn-ghost ">sign up</a>
                   </Link>
 

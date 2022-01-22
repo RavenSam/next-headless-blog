@@ -4,6 +4,7 @@ import SearchModal from "../SearchModal"
 import NavbarMD from "./NavbarMD"
 import NavbarSM from "./NavbarSM"
 import Link from "next/link"
+import { useEffect, useState } from "react"
 
 const navLists = [
    { title: "home", href: "/" },
@@ -14,6 +15,12 @@ const navLists = [
 
 export default function Header() {
    const { theme } = useTheme()
+   const [user, setUser] = useState(null)
+
+   useEffect(() => {
+      const getUser = JSON.parse(localStorage.getItem("user"))
+      setUser(getUser)
+   }, [])
 
    return (
       <header className="w-full ">
@@ -32,13 +39,13 @@ export default function Header() {
             </Link>
 
             <div className="hidden md:block">
-               <NavbarMD navLists={navLists} />
+               <NavbarMD navLists={navLists} user={user} />
             </div>
 
             <div className="md:hidden flex items-center space-x-2">
                <SearchModal />
 
-               <NavbarSM navLists={navLists} />
+               <NavbarSM navLists={navLists} user={user} />
             </div>
          </div>
       </header>

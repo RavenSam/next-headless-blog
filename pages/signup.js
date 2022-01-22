@@ -7,16 +7,16 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import axios from "axios"
 import { Spinner } from "../components/Loading"
-import Cookies from "js-cookie"
+import toast from "react-hot-toast"
 
 const inputs = [
-   { name: "username", label: "username", type: "text", icon: BsPerson },
-   { name: "email", label: "your email", type: "email", icon: BsEnvelope },
-   { name: "password", label: "your password", type: "password", icon: BsKey },
-   { name: "password2", label: "confirm password", type: "password", icon: BsKey },
+   { name: "username", label: "username", type: "text", icon: BsPerson, placeholder: "johndoe" },
+   { name: "email", label: "your email", type: "email", icon: BsEnvelope, placeholder: "johndoe@exemple.com" },
+   { name: "password", label: "your password", type: "password", icon: BsKey, placeholder: "••••••••••" },
+   { name: "password2", label: "confirm password", type: "password", icon: BsKey, placeholder: "••••••••••" },
 ]
 
-const schema = yup.object().shape({
+const signupSchema = yup.object().shape({
    username: yup.string().min(4).max(32).required(),
    email: yup.string().email().required(),
    password: yup.string().min(8).max(32).required(),
@@ -26,19 +26,24 @@ const schema = yup.object().shape({
 export default function SignUp() {
    const [showPassword, setShowPassword] = useState({ password: false, password2: false })
    const { back } = useRouter()
-   const { register, handleSubmit, setError, formState, reset } = useForm({ resolver: yupResolver(schema) })
+   const { register, handleSubmit, setError, formState, reset } = useForm({ resolver: yupResolver(signupSchema) })
    const { errors, isSubmitting } = formState
 
    const onSubmitHandler = async (data) => {
       try {
          const res = await axios.post("/api/auth/register", { data })
 
-         Cookies.set("user", JSON.stringify(res.data))
+         localStorage.setItem("user", JSON.stringify(res.data))
 
          reset()
+
+         toast.success("You Have Registred Successfuly", { className: "toast", duration: 4000 })
+
+         setTimeout(() => (location.href = "/"), 2000)
       } catch (err) {
          console.log(err.message)
          setError("apiError", { message: "Something went wrong: Registration Failed" })
+         toast.error("Something went wrong", { className: "toast", duration: 4000 })
       }
    }
 
@@ -59,11 +64,14 @@ export default function SignUp() {
                </h1>
 
                <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
-                  <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p>
+                  {/* <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p> */}
 
                   {inputs.map((input, i) => (
                      <div key={i} className="space-y-2">
-                        <label htmlFor={input.name} className="text-sm capitalize font-medium flex items-center gap-2">
+                        <label
+                           htmlFor={input.name}
+                           className="text-sm px-2 capitalize font-medium flex items-center gap-2"
+                        >
                            <span className="text-sky-500 ">
                               <input.icon size={20} />
                            </span>
@@ -77,6 +85,7 @@ export default function SignUp() {
                               type={
                                  input.type !== "password" ? input.type : showPassword[input.name] ? "text" : "password"
                               }
+                              placeholder={input.placeholder}
                            />
 
                            {input.type === "password" && (

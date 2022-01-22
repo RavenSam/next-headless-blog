@@ -1,6 +1,7 @@
 import { ThemeProvider } from "next-themes"
 import NextNprogress from "nextjs-progressbar"
 import { QueryClient, QueryClientProvider } from "react-query"
+import { Toaster } from "react-hot-toast"
 
 // Styles
 import "../styles/globals.css"
@@ -16,6 +17,7 @@ function MyApp({ Component, pageProps }) {
    return (
       <ThemeProvider attribute="class">
          <NextNprogress options={{ showSpinner: false }} color="#188ec2" />
+         <Toaster />
 
          <QueryClientProvider client={queryClient}>
             <Layout>

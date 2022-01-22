@@ -47,7 +47,7 @@ export default function TabsPosts() {
          </div>
 
          {isLoading ? (
-            <div className="min-h-[150px] flex items-center justify-center  mt-4 rounded-xl">
+            <div className="h-[100px] flex items-center justify-center  mt-4 rounded-xl">
                <Loading />
             </div>
          ) : (

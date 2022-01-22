@@ -8,23 +8,23 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import axios from "axios"
 import { Spinner } from "../components/Loading"
-import Cookies from "js-cookie"
+import toast from "react-hot-toast"
 
-const schema = yup.object().shape({
+const loginSchema = yup.object().shape({
    email: yup.string().email().required(),
    password: yup.string().min(8).max(32).required(),
 })
 
 const inputs = [
-   { name: "email", label: "your email", type: "email", icon: BsEnvelope },
-   { name: "password", label: "your password", type: "password", icon: BsKey },
+   { name: "email", label: "your email", type: "email", icon: BsEnvelope, placeholder: "johndoe@exemple.com" },
+   { name: "password", label: "your password", type: "password", icon: BsKey, placeholder: "••••••••••" },
 ]
 
 export default function Login() {
    const [showPassword, setShowPassword] = useState({ password: false })
    const { back } = useRouter()
 
-   const { register, handleSubmit, setError, formState, reset } = useForm({ resolver: yupResolver(schema) })
+   const { register, handleSubmit, setError, formState, reset } = useForm({ resolver: yupResolver(loginSchema) })
    const { errors, isSubmitting } = formState
 
    const onSubmitHandler = async (data) => {
@@ -33,12 +33,17 @@ export default function Login() {
 
          const res = await axios.post("/api/auth/login", { loginInfo })
 
-         Cookies.set("user", JSON.stringify(res.data))
+         localStorage.setItem("user", JSON.stringify(res.data))
 
          reset()
+
+         toast.success("You Have Successfuly Logged", { className: "toast", duration: 4000 })
+
+         setTimeout(() => (location.href = "/"), 2000)
       } catch (err) {
          console.log(err.message)
          setError("apiError", { message: "Failed to Login: wrong email or password" })
+         toast.error("Failed to Login: wrong email or password", { className: "toast", duration: 4000 })
       }
    }
 
@@ -64,7 +69,7 @@ export default function Login() {
                         <FcGoogle size={25} />
                      </button>
 
-                     <button className="justify-center gap-4 text-white   bg-[#4267B2] w-full  rounded-md py-4 btn border hover:opacity-80">
+                     <button className="justify-center gap-4 text-white   bg-[#4267B2] w-full  rounded-md py-4 btn hover:opacity-80">
                         <BsFacebook size={25} />
                      </button>
                   </div>
@@ -77,11 +82,14 @@ export default function Login() {
                </div>
 
                <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
-                  <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p>
+                  {/* <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p> */}
 
                   {inputs.map((input, i) => (
                      <div key={i} className="space-y-2">
-                        <label htmlFor={input.name} className="text-sm capitalize font-medium flex items-center gap-2">
+                        <label
+                           htmlFor={input.name}
+                           className="text-sm px-2 capitalize font-medium flex items-center gap-2"
+                        >
                            <span className="text-sky-500 ">
                               <input.icon size={20} />
                            </span>
@@ -95,6 +103,7 @@ export default function Login() {
                               type={
                                  input.type !== "password" ? input.type : showPassword[input.name] ? "text" : "password"
                               }
+                              placeholder={input.placeholder}
                            />
 
                            {input.type === "password" && (

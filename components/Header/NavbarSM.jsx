@@ -1,5 +1,4 @@
 import Link from "next/link"
-import { useState } from "react"
 import ThemeToggle from "../ThemeToggle"
 import Drawer from "../shared/Drawer"
 import Image from "next/image"
@@ -8,14 +7,13 @@ import { useRouter } from "next/router"
 import { HiOutlineCog, HiOutlineLogout } from "react-icons/hi"
 import logout from "../../lib/logout"
 
-export default function NavbarSM({ navLists }) {
-   const [logged, setLogged] = useState(false)
+export default function NavbarSM({ navLists, user }) {
    const { pathname } = useRouter()
 
    return (
       <Drawer>
          <div className="h-full flex flex-col space-y-6">
-            {logged ? (
+            {user ? (
                <div className="group flex items-center  space-x-4 ">
                   <div className="relative img">
                      <Image
@@ -29,11 +27,11 @@ export default function NavbarSM({ navLists }) {
                   </div>
 
                   <div className="max-w-sm space-y-1">
-                     <h2 title="Jon Doe" className="font-bold text-lg mb-2 text-sky-500 transition duration-500">
-                        {trancate("John Doe", 30)}
+                     <h2 title={user.username} className="font-bold text-lg mb-2 text-sky-500 transition duration-500">
+                        {trancate(user.username, 15)}
                      </h2>
 
-                     <p className="text-gray-600 dark:text-gray-400 text-sm ">@johndoe</p>
+                     <p className="text-gray-600 dark:text-gray-400 text-sm ">{user.email}</p>
                   </div>
                </div>
             ) : (
@@ -56,7 +54,7 @@ export default function NavbarSM({ navLists }) {
                      <HiOutlineCog size={20} />
                   </button>
 
-                  {logged && (
+                  {user && (
                      <button className="btn-icon " onClick={logout}>
                         <HiOutlineLogout size={20} />
                      </button>

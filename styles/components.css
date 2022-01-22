@@ -42,4 +42,8 @@
    .xlContainer {
       @apply w-full max-w-6xl mx-auto;
    }
+
+   .toast {
+      @apply !px-5 !py-4 !rounded-xl !font-medium tracking-wide dark:!text-white dark:!bg-gray-900;
+   }
 }
