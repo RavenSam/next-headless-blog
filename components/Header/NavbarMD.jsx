@@ -24,15 +24,15 @@ export default function NavbarMD({ navLists, user }) {
          {user ? (
             <Dropdown round img="/images/user.jpg">
                <div className="p-1 flex flex-col text-sm space-y-1">
-                  <Link href="/login">
+                  <Link href="/user">
                      <a className="btn-ghost ">profile</a>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/user/settings">
                      <a className="btn-ghost ">settings</a>
                   </Link>
 
-                  <Link href="/">
+                  <Link href="/user/help">
                      <a className="btn-ghost ">help</a>
                   </Link>
 
