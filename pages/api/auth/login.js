@@ -12,7 +12,9 @@ export default function login(req, res) {
       .then((response) => response.json())
       .then((data) => {
          if (data.error) {
-            return res.status(404).json(data.error).end()
+            res.json(data.error)
+            res.status(404)
+            res.end()
          } else {
             res.setHeader(
                "Set-Cookie",
@@ -22,7 +24,8 @@ export default function login(req, res) {
                })
             )
 
-            return res.status(200).json(data.user).end()
+            res.status(200).json(data.user)
+            res.end()
          }
       })
 }

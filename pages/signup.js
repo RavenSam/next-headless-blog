@@ -39,7 +39,7 @@ export default function SignUp() {
 
          toast.success("You Have Registred Successfuly", { className: "toast", duration: 4000 })
 
-         setTimeout(() => (location.href = "/"), 2000)
+         setTimeout(() => (location.href = "/user"), 2000)
       } catch (err) {
          console.log(err.message)
          setError("apiError", { message: "Something went wrong: Registration Failed" })

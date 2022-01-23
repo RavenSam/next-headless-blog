@@ -12,7 +12,7 @@ export default function register(req, res) {
       .then((response) => response.json())
       .then((data) => {
          if (data.error) {
-            return res.status(404).json(data.error).end()
+            return res.status(404).json(data.error)
          } else {
             res.setHeader(
                "Set-Cookie",
@@ -22,7 +22,7 @@ export default function register(req, res) {
                })
             )
 
-            return res.status(200).json(data.user).end()
+            return res.status(200).json(data.user)
          }
       })
 }

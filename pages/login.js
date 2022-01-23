@@ -39,7 +39,7 @@ export default function Login() {
 
          toast.success("You Have Successfuly Logged", { className: "toast", duration: 4000 })
 
-         setTimeout(() => (location.href = "/"), 2000)
+         setTimeout(() => (location.href = "/user"), 2000)
       } catch (err) {
          console.log(err.message)
          setError("apiError", { message: "Failed to Login: wrong email or password" })
