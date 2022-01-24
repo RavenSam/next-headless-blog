@@ -8,7 +8,7 @@
    }
 
    .btn-1 {
-      @apply text-white w-full capitalize font-medium flex items-center gap-2 rounded-xl hover:bg-white hover:text-gray-700;
+      @apply text-gray-700 dark:text-white w-full capitalize font-medium flex items-center gap-2 rounded-xl dark:hover:bg-gray-100 hover:bg-gray-800 hover:text-white dark:hover:text-gray-700;
    }
 
    .btn-ghost {
@@ -40,7 +40,7 @@
    }
 
    .input {
-      @apply bg-gray-50 dark:bg-gray-800 dark:text-white border  block w-full p-2.5 border-gray-600 text-gray-900 text-sm rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-300;
+      @apply bg-gray-50 dark:bg-gray-800 dark:text-white border  block w-full p-2.5 border-gray-500 text-gray-900 text-sm rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-300;
    }
 
    .xlContainer {
@@ -51,6 +51,6 @@
       @apply !px-5 !py-4 !rounded-xl !font-medium tracking-wide dark:!text-white dark:!bg-gray-900;
    }
    .tooltip {
-      @apply text-sm font-semibold capitalize bg-white shadow-2xl border py-2 px-3 absolute left-[122px] top-0 group-hover:top-1/2 transform -translate-x-1/2 -translate-y-1/2  rounded-xl w-[122px] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none;
+      @apply text-sm font-semibold capitalize bg-white dark:bg-gray-900 dark:border-gray-700 shadow-2xl border py-2 px-3 absolute  left-[122px] top-0 group-hover:top-1/2 transform -translate-x-1/2 -translate-y-1/2  rounded-xl w-[122px] opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none;
    }
 }

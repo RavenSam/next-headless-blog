@@ -1,27 +1,14 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { BsEyeFill, BsEnvelope, BsKey, BsEyeSlashFill, BsArrowLeft, BsPerson } from "react-icons/bs"
+import { BsEyeFill, BsEyeSlashFill, BsArrowLeft } from "react-icons/bs"
 import { useForm } from "react-hook-form"
-import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import axios from "axios"
 import { Spinner } from "../components/Loading"
 import toast from "react-hot-toast"
-
-const inputs = [
-   { name: "username", label: "username", type: "text", icon: BsPerson, placeholder: "johndoe" },
-   { name: "email", label: "your email", type: "email", icon: BsEnvelope, placeholder: "johndoe@exemple.com" },
-   { name: "password", label: "your password", type: "password", icon: BsKey, placeholder: "••••••••••" },
-   { name: "password2", label: "confirm password", type: "password", icon: BsKey, placeholder: "••••••••••" },
-]
-
-const signupSchema = yup.object().shape({
-   username: yup.string().min(4).max(32).required(),
-   email: yup.string().email().required(),
-   password: yup.string().min(8).max(32).required(),
-   password2: yup.string().oneOf([yup.ref("password"), null], "passwords must match"),
-})
+import { registerInputs } from "../lib/inputsArrays"
+import { signupSchema } from "../lib/yupSchima"
 
 export default function SignUp() {
    const [showPassword, setShowPassword] = useState({ password: false, password2: false })
@@ -64,9 +51,7 @@ export default function SignUp() {
                </h1>
 
                <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
-                  {/* <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p> */}
-
-                  {inputs.map((input, i) => (
+                  {registerInputs.map((input, i) => (
                      <div key={i} className="space-y-2">
                         <label
                            htmlFor={input.name}

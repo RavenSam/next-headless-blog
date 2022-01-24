@@ -1,24 +1,15 @@
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { useState } from "react"
-import { BsEyeFill, BsEnvelope, BsKey, BsEyeSlashFill, BsArrowLeft, BsFacebook } from "react-icons/bs"
+import { BsEyeFill, BsEyeSlashFill, BsArrowLeft, BsFacebook } from "react-icons/bs"
 import { FcGoogle } from "react-icons/fc"
 import { useForm } from "react-hook-form"
-import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import axios from "axios"
 import { Spinner } from "../components/Loading"
 import toast from "react-hot-toast"
-
-const loginSchema = yup.object().shape({
-   email: yup.string().email().required(),
-   password: yup.string().min(8).max(32).required(),
-})
-
-const inputs = [
-   { name: "email", label: "your email", type: "email", icon: BsEnvelope, placeholder: "johndoe@exemple.com" },
-   { name: "password", label: "your password", type: "password", icon: BsKey, placeholder: "••••••••••" },
-]
+import { loginSchema } from "../lib/yupSchima"
+import { loginInputs } from "../lib/inputsArrays"
 
 export default function Login() {
    const [showPassword, setShowPassword] = useState({ password: false })
@@ -82,9 +73,7 @@ export default function Login() {
                </div>
 
                <form className="space-y-5" onSubmit={handleSubmit(onSubmitHandler)}>
-                  {/* <p className="text-pink-500 text-sm px-2 text-center">{errors.apiError?.message}</p> */}
-
-                  {inputs.map((input, i) => (
+                  {loginInputs.map((input, i) => (
                      <div key={i} className="space-y-2">
                         <label
                            htmlFor={input.name}
