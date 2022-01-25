@@ -14,10 +14,11 @@ import logout from "../../lib/logout"
 import ThemeToggle from "../ThemeToggle"
 import trancate from "../../utils/trancate"
 import { useRouter } from "next/router"
+import Link from "next/link"
 
 const navLinks = [
    { name: "dashboard", icon: BiGridAlt, href: "#" },
-   { name: "user", icon: BiUser, href: "#" },
+   { name: "user", icon: BiUser, href: "/user" },
    { name: "liked", icon: BiHeart, href: "#" },
    { name: "history", icon: BiHistory, href: "#" },
    { name: "bookmark", icon: BiBookmark, href: "#" },
@@ -58,15 +59,14 @@ export default function SideNav({ openNav, setOpenNav, menuDrawer, user }) {
             <ul className="nav_list mt-5 space-y-1">
                {navLinks.map((link, i) => (
                   <li key={i} className="group relative h-12 w-full leading-[48px] ">
-                     <a
-                        href={`${link.href}`}
-                        className={`btn-1 ${pathname === link.href && "!text-sky-500 dark:!bg-white !bg-gray-900"}`}
-                     >
-                        <span className="h-12 min-w-[48px] rounded-xl flex items-center justify-center">
-                           <link.icon size={20} />
-                        </span>
-                        {openNav && <span className="links_name">{link.name}</span>}
-                     </a>
+                     <Link href={`${link.href}`}>
+                        <a className={`btn-1 ${pathname === link.href && "!text-sky-500 dark:!bg-white !bg-gray-900"}`}>
+                           <span className="h-12 min-w-[48px] rounded-xl flex items-center justify-center">
+                              <link.icon size={20} />
+                           </span>
+                           {openNav && <span className="links_name">{link.name}</span>}
+                        </a>
+                     </Link>
 
                      {!openNav && <span className="tooltip ">{link.name}</span>}
                   </li>

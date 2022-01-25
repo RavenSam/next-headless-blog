@@ -22,9 +22,7 @@ export default function CardVarient2({ post }) {
 
             <div className="absolute inset-0 h-full flex flex-col justify-end p-[8%]">
                <Link href="#2">
-                  <a className="font-medium border border-white bg-black bg-opacity-30 text-white w-min px-4 py-1 rounded-md capitalize hover:text-sky-500 hover:border-sky-500">
-                     {post.category.data.attributes.name}
-                  </a>
+                  <a className="cat">{post.category.data.attributes.name}</a>
                </Link>
 
                <div className="py-2">

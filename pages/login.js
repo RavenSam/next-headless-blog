@@ -28,7 +28,7 @@ export default function Login() {
 
          reset()
 
-         toast.success("You Have Successfuly Logged", { className: "toast", duration: 4000 })
+         toast.success("You Have Successfully Logged", { className: "toast", duration: 4000 })
 
          setTimeout(() => (location.href = "/user"), 2000)
       } catch (err) {

@@ -24,7 +24,7 @@ export default function SignUp() {
 
          reset()
 
-         toast.success("You Have Registred Successfuly", { className: "toast", duration: 4000 })
+         toast.success("You Have Registred Successfully", { className: "toast", duration: 4000 })
 
          setTimeout(() => (location.href = "/user"), 2000)
       } catch (err) {

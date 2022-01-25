@@ -35,7 +35,7 @@ export default function Post({ data }) {
       setBookmarkedPost(!bookmarkedPost)
    }
 
-   const tags = data.attributes.tags.data.map((tag) => tag.attributes.name) || ""
+   const tags = data.attributes.tags.data.map((tag) => tag.attributes.name) || []
 
    const html = marked.parse(data.attributes.content)
 
@@ -60,9 +60,7 @@ export default function Post({ data }) {
 
                <div className="absolute inset-0 h-full flex flex-col justify-end p-8 sm:p-[8%]">
                   <Link href="#2">
-                     <a className="font-medium border text-xs md:text-sm border-white bg-black bg-opacity-30 text-white w-min px-4 py-1 rounded-md capitalize hover:text-sky-500 hover:border-sky-500">
-                        {data.attributes.category.data.attributes.name}
-                     </a>
+                     <a className="cat">{data.attributes.category.data.attributes.name}</a>
                   </Link>
 
                   <div className="py-2 md:w-1/2">
@@ -94,14 +92,14 @@ export default function Post({ data }) {
                         <span>
                            <BsFillChatDotsFill size={17} />
                         </span>
-                        <span>21</span>
+                        <span>{data.attributes.comments.data.length}</span>
                      </a>
 
                      <div className="flex items-center gap-2 p-3">
                         <span className="text-pink-500">
                            <BsHeartFill size={17} />
                         </span>
-                        <span>109</span>
+                        <span>{data.attributes.likes.data.length}</span>
                      </div>
                   </div>
                </div>
@@ -151,7 +149,10 @@ export default function Post({ data }) {
                      <div className="flex flex-wrap gap-1">
                         {tags.map((tag, i) => (
                            <Link key={i} href="#">
-                              <a className="tag">#{tag}</a>
+                              <a className="tag">
+                                 <span className="text-sky-400">#</span>
+                                 {tag}
+                              </a>
                            </Link>
                         ))}
                      </div>
@@ -163,7 +164,7 @@ export default function Post({ data }) {
                <div className="col-span-1 lg:col-span-2"></div>
 
                <div id="comments" className="col-span-8 mt-8">
-                  <PostComments />
+                  <PostComments postId={data.id} />
                </div>
 
                <div className="col-span-3 lg:col-span-2"></div>
