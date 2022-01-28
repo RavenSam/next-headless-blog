@@ -15,8 +15,8 @@ import { useState } from "react"
 import Link from "next/link"
 import moment from "moment"
 import PostComments from "../../components/PostComments"
-import { NextSeo } from "next-seo"
 import Meta from "../../components/Meta"
+import ShareModal from "../../components/ShareModal"
 
 export default function Post({ data }) {
    const router = useRouter()
@@ -73,7 +73,9 @@ export default function Post({ data }) {
                   </div>
 
                   <div className="flex items-center text-sm text-gray-300 space-x-2">
-                     {/* <Link href="#3"><a className="hover:text-sky-500">{post.author.name}</a></Link> */}
+                     <Link href="#3">
+                        <a className="hover:text-sky-500">John Doe</a>
+                     </Link>
 
                      <span>&#8226;</span>
 
@@ -110,9 +112,7 @@ export default function Post({ data }) {
             <div className="relative grid md:grid-cols-12">
                <div className="col-span-1 lg:col-span-2 w-full absolute md:relative top-0 left-0 z-10 transform md:transform-none -translate-y-1/2">
                   <div className="flex md:flex-col justify-end md:justify-start items-center p-4 space-x-4 md:space-x-0 md:space-y-4">
-                     <button className="btn-icon-1" title="Sahre Post" aria-label="Share">
-                        <BsShareFill size={20} />
-                     </button>
+                     <ShareModal path={router.asPath} />
 
                      <button
                         className={`btn-icon-1 ${bookmarkedPost && "!text-blue-500 hover:!text-blue-600"}`}
@@ -135,7 +135,7 @@ export default function Post({ data }) {
                </div>
 
                <div className="col-span-8 px-6 pb-6  mb-10 z-[5] rounded-xl border-2 dark:border-none bg-white dark:bg-gray-900 md:shadow-xl">
-                  <article className="prose dark:prose-invert ">
+                  <article className="md:prose prose-sm prose-headings:font-semibold dark:prose-invert ">
                      <div dangerouslySetInnerHTML={{ __html: html }} />
                   </article>
                </div>

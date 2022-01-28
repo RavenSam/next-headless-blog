@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Fragment, useRef, useState } from "react"
 import { HiUser, HiX } from "react-icons/hi"
 
-export default function Modal({ children, icon, title, initFocusRef }) {
+export default function Modal({ children, icon, title, initFocusRef, className = "btn-icon" }) {
    const [open, setOpen] = useState(false)
    const cancelButtonRef = useRef()
 
@@ -10,7 +10,7 @@ export default function Modal({ children, icon, title, initFocusRef }) {
 
    return (
       <>
-         <button className="btn-icon" onClick={() => setOpen(!open)} aria-label="Open Modal">
+         <button className={className} onClick={() => setOpen(!open)} aria-label="Open Modal">
             <BtnIcon size={20} />
          </button>
 

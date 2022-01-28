@@ -8,9 +8,9 @@ export default function Meta({ data }) {
       <NextSeo
          title={data?.attributes.title}
          description={data?.attributes.description}
-         canonical={`https://sisky.vercel.app${router.asPath}`}
+         canonical={`${process.env.NEXT_PUBLIC_DOMAIN}${router.asPath}`}
          openGraph={{
-            url: "https://sisky.vercel.app/",
+            url: process.env.NEXT_PUBLIC_DOMAIN,
             title: data?.attributes.title,
             description: data?.attributes.description,
             type: "website",
