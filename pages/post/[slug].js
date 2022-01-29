@@ -2,37 +2,18 @@ import { marked } from "marked"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import Loading from "../../components/Loading"
-import {
-   BsBookmark,
-   BsBookmarkFill,
-   BsEyeFill,
-   BsFillChatDotsFill,
-   BsHeart,
-   BsHeartFill,
-   BsShareFill,
-} from "react-icons/bs"
-import { useState } from "react"
+import { BsEyeFill, BsFillChatDotsFill, BsHeartFill } from "react-icons/bs"
 import Link from "next/link"
 import moment from "moment"
 import PostComments from "../../components/PostComments"
 import Meta from "../../components/Meta"
-import ShareModal from "../../components/ShareModal"
+import PostButtons from "../../components/PostButtons"
 
 export default function Post({ data }) {
    const router = useRouter()
-   const [likedPost, setLikedPost] = useState(false)
-   const [bookmarkedPost, setBookmarkedPost] = useState(false)
 
    if (router.isFallback) {
       return <Loading />
-   }
-
-   const handleLiked = () => {
-      setLikedPost(!likedPost)
-   }
-
-   const handleBookmark = () => {
-      setBookmarkedPost(!bookmarkedPost)
    }
 
    const tags = data.attributes.tags.data.map((tag) => tag.attributes.name) || []
@@ -111,27 +92,7 @@ export default function Post({ data }) {
          <div className="xlContainer px-2">
             <div className="relative grid md:grid-cols-12">
                <div className="col-span-1 lg:col-span-2 w-full absolute md:relative top-0 left-0 z-10 transform md:transform-none -translate-y-1/2">
-                  <div className="flex md:flex-col justify-end md:justify-start items-center p-4 space-x-4 md:space-x-0 md:space-y-4">
-                     <ShareModal path={router.asPath} />
-
-                     <button
-                        className={`btn-icon-1 ${bookmarkedPost && "!text-blue-500 hover:!text-blue-600"}`}
-                        onClick={handleBookmark}
-                        title="Bookmark Post"
-                        aria-label="Bookmark"
-                     >
-                        {bookmarkedPost ? <BsBookmarkFill size={20} /> : <BsBookmark size={20} />}
-                     </button>
-
-                     <button
-                        className={`btn-icon-1 ${likedPost && "!text-pink-500 hover:!text-pink-600"}`}
-                        onClick={handleLiked}
-                        title="Like Post"
-                        aria-label="Like"
-                     >
-                        {likedPost ? <BsHeartFill size={20} /> : <BsHeart size={20} />}
-                     </button>
-                  </div>
+                  <PostButtons postId={data.id} />
                </div>
 
                <div className="col-span-8 px-6 pb-6  mb-10 z-[5] rounded-xl border-2 dark:border-none bg-white dark:bg-gray-900 md:shadow-xl">
@@ -140,7 +101,7 @@ export default function Post({ data }) {
                   </article>
                </div>
 
-               <div className="col-span-3 lg:col-span-2  w-full">
+               <div className="col-span-12 md:col-span-3 lg:col-span-2  w-full">
                   <div className="px-2 py-4">
                      <h3 className="font-semibold text-lg md:text-xl pb-2">
                         Tags <span className="text-sky-500">.</span>
