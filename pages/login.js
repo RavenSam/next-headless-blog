@@ -24,6 +24,12 @@ export default function Login() {
 
          const res = await axios.post("/api/auth/login", { loginInfo })
 
+         if (res.data.status === 400) {
+            toast.error("wrong email or password", { className: "toast", duration: 4000 })
+            console.log(res)
+            return
+         }
+
          localStorage.setItem("user", JSON.stringify(res.data))
 
          reset()

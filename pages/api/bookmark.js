@@ -1,7 +1,7 @@
 const cookie = require("cookie")
 const { isEmpty } = require("lodash")
 
-export default async function likes(req, res) {
+export default async function bookmark(req, res) {
    if (req.method === "PUT") {
       try {
          const { token } = cookie.parse(req.headers.cookie)
@@ -9,21 +9,21 @@ export default async function likes(req, res) {
 
          if (token) {
             const resLikes = await fetch(
-               `${process.env.NEXT_PUBLIC_API_URL}/api/articles/${postId}?&fields=slug&populate=likes`
+               `${process.env.NEXT_PUBLIC_API_URL}/api/articles/${postId}?&fields=slug&populate=bookmarks`
             )
 
-            const likes = await resLikes.json()
+            const bookmarks = await resLikes.json()
 
-            const likesUsers = likes.data.attributes.likes.data
-            const alreadyLikes = likesUsers.some((userLike) => userLike.id === user.id)
+            const bookmarksUsers = bookmarks.data.attributes.bookmarks.data
+            const alreadybookmarks = bookmarksUsers.some((userLike) => userLike.id === user.id)
 
-            if (alreadyLikes) {
+            if (alreadybookmarks) {
                // Already Exists
-               // Remove the like
+               // Remove the bookmarks
 
-               const filteredLikes = likesUsers.filter((userLike) => userLike.id !== user.id)
+               const filteredbookmarks = bookmarksUsers.filter((userLike) => userLike.id !== user.id)
 
-               const sendLikes = { likes: filteredLikes }
+               const sendbookmarks = { bookmarks: filteredbookmarks }
 
                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles/${postId}`, {
                   method: "PUT",
@@ -32,7 +32,7 @@ export default async function likes(req, res) {
                      "Content-Type": "application/json",
                      Authorization: `Bearer ${token}`,
                   },
-                  body: JSON.stringify({ data: sendLikes }),
+                  body: JSON.stringify({ data: sendbookmarks }),
                })
 
                const data = response.json()
@@ -40,9 +40,11 @@ export default async function likes(req, res) {
                res.status(200).json(data)
             } else {
                // Not Exists
-               // Add the like
+               // Add the bookmarks
 
-               const sendLikes = isEmpty(likesUsers) ? { likes: user.id } : { likes: [user.id, ...likesUsers] }
+               const sendbookmarks = isEmpty(bookmarksUsers)
+                  ? { bookmarks: user.id }
+                  : { bookmarks: [user.id, ...bookmarksUsers] }
 
                const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/articles/${postId}`, {
                   method: "PUT",
@@ -51,7 +53,7 @@ export default async function likes(req, res) {
                      "Content-Type": "application/json",
                      Authorization: `Bearer ${token}`,
                   },
-                  body: JSON.stringify({ data: sendLikes }),
+                  body: JSON.stringify({ data: sendbookmarks }),
                })
 
                const data = response.json()

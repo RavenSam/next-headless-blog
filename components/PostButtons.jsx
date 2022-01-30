@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BsBookmark, BsBookmarkFill, BsHeart, BsHeartFill } from "react-icons/bs"
 import ShareModal from "./ShareModal"
 import axios from "axios"
@@ -21,14 +21,21 @@ export default function PostButtons({ postId }) {
 
    const { isLoading, error, data, refetch } = useQuery(["likes", { postId }], getLikes)
 
+   useEffect(() => {
+      const user = JSON.parse(localStorage.getItem("user"))
+      const likesUsers = data.data.attributes.likes.data
+      const alreadyLikes = likesUsers.some((userLike) => userLike.id === user.id)
+      setLikedPost(alreadyLikes)
+   }, [])
+
    const handleLiked = async () => {
-      setLikedPost(!likedPost)
       try {
          const user = JSON.parse(localStorage.getItem("user"))
 
          const res = await axios.put("/api/likes", { postId, likes: data, user })
          console.log(res)
 
+         setLikedPost(!likedPost)
          refetch()
       } catch (err) {
          console.log(err)

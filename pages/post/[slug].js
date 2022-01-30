@@ -24,11 +24,11 @@ export default function Post({ data }) {
       <>
          <Meta data={data} />
 
-         <div className="p-2">
-            <div className="relative overflow-hidden rounded-xl">
-               <div className="img relative overflow-hidden rounded-xl h-[55vh] sm:h-[70vh] md:h-[80vh]">
+         <div className="sm:p-2">
+            <div className="relative overflow-hidden sm:rounded-xl">
+               <div className="img relative overflow-hidden sm:rounded-xl h-[55vh] sm:h-[70vh] md:h-[80vh]">
                   <Image
-                     className="w-full rounded-xl "
+                     className="w-full sm:rounded-xl "
                      src={data.attributes.featuredImage.data.attributes.url}
                      alt={data.attributes.title}
                      layout="fill"
@@ -89,13 +89,13 @@ export default function Post({ data }) {
             </div>
          </div>
 
-         <div className="xlContainer px-2">
-            <div className="relative grid md:grid-cols-12">
+         <div className="xlContainer sm:px-2">
+            <div className="relative md:grid md:grid-cols-12">
                <div className="col-span-1 lg:col-span-2 w-full absolute md:relative top-0 left-0 z-10 transform md:transform-none -translate-y-1/2">
                   <PostButtons postId={data.id} />
                </div>
 
-               <div className="col-span-8 px-6 pb-6  mb-10 z-[5] rounded-xl border-2 dark:border-none bg-white dark:bg-gray-900 md:shadow-xl">
+               <div className="col-span-8 px-4 md:px-6 py-6  mb-10 z-[5] sm:rounded-xl sm:border-2 dark:border-none bg-white dark:bg-gray-900 md:shadow-xl">
                   <article className="md:prose prose-sm prose-headings:font-semibold dark:prose-invert ">
                      <div dangerouslySetInnerHTML={{ __html: html }} />
                   </article>
@@ -121,10 +121,10 @@ export default function Post({ data }) {
                </div>
             </div>
 
-            <div className="grid md:grid-cols-12">
+            <div className="grid md:grid-cols-12 ">
                <div className="col-span-1 lg:col-span-2"></div>
 
-               <div id="comments" className="col-span-8 mt-8">
+               <div id="comments" className="col-span-8 mt-8 px-2 py-4">
                   <PostComments postId={data.id} />
                </div>
 
