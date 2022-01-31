@@ -25,7 +25,7 @@ export default function Settings() {
 
    return (
       <div>
-         <div className="-z-10 relative rounded-xl shadow px-5 py-8 md:p-10 bg-white dark:bg-gray-900">
+         <div className="relative rounded-xl shadow px-5 py-8 md:p-10 bg-white dark:bg-gray-900">
             <h1 className="text-xl md:text-2xl font-bold">Settings</h1>
          </div>
 

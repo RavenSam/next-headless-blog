@@ -20,7 +20,7 @@ export default function CardVarient1({ post }) {
 
             <div className="absolute top-5 left-5">
                <Link href="#2">
-                  <a className="cat">{post.category.data.attributes.name}</a>
+                  <a className="cat">{post.category?.data.attributes.name}</a>
                </Link>
             </div>
 

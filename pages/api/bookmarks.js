@@ -8,20 +8,20 @@ export default async function bookmark(req, res) {
          const { postId, user } = req.body
 
          if (token) {
-            const resLikes = await fetch(
+            const resBookmarks = await fetch(
                `${process.env.NEXT_PUBLIC_API_URL}/api/articles/${postId}?&fields=slug&populate=bookmarks`
             )
 
-            const bookmarks = await resLikes.json()
+            const bookmarks = await resBookmarks.json()
 
             const bookmarksUsers = bookmarks.data.attributes.bookmarks.data
-            const alreadybookmarks = bookmarksUsers.some((userLike) => userLike.id === user.id)
+            const alreadyBookmarked = bookmarksUsers.some((userBookmarks) => userBookmarks.id === user.id)
 
-            if (alreadybookmarks) {
+            if (alreadyBookmarked) {
                // Already Exists
                // Remove the bookmarks
 
-               const filteredbookmarks = bookmarksUsers.filter((userLike) => userLike.id !== user.id)
+               const filteredbookmarks = bookmarksUsers.filter((userBookmarks) => userBookmarks.id !== user.id)
 
                const sendbookmarks = { bookmarks: filteredbookmarks }
 
@@ -67,6 +67,6 @@ export default async function bookmark(req, res) {
          res.status(404).json({ error: "Somthing went wrong", err })
       }
    } else {
-      res.status(404).json({ error: "only post request" })
+      res.status(404).json({ error: "post request only" })
    }
 }

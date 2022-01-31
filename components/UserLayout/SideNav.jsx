@@ -17,11 +17,11 @@ import { useRouter } from "next/router"
 import Link from "next/link"
 
 const navLinks = [
-   { name: "dashboard", icon: BiGridAlt, href: "#" },
+   { name: "dashboard", icon: BiGridAlt, href: "/user/dashboard" },
    { name: "user", icon: BiUser, href: "/user" },
-   { name: "liked", icon: BiHeart, href: "#" },
-   { name: "history", icon: BiHistory, href: "#" },
-   { name: "bookmark", icon: BiBookmark, href: "#" },
+   { name: "likes", icon: BiHeart, href: "/user/likes" },
+   { name: "history", icon: BiHistory, href: "/user/history" },
+   { name: "bookmarks", icon: BiBookmark, href: "/user/bookmarks" },
    { name: "settings", icon: BiCog, href: "/user/settings" },
 ]
 

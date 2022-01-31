@@ -8,13 +8,13 @@ import { HiOutlineCog, HiOutlineLogout } from "react-icons/hi"
 import logout from "../../lib/logout"
 
 export default function NavbarSM({ navLists, user }) {
-   const { pathname } = useRouter()
+   const { pathname, push } = useRouter()
 
    return (
       <Drawer>
          <div className="h-full flex flex-col space-y-6">
             {user ? (
-               <div className="group flex items-center  space-x-4 ">
+               <div className="group flex items-center  space-x-4 cursor-pointer" onClick={() => push("/user")}>
                   <div className="relative img">
                      <Image
                         className="w-full rounded-full "

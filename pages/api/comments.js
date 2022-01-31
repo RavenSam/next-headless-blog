@@ -22,6 +22,6 @@ export default async function comments(req, res) {
          res.status(404).json({ error: "Somthing went wrong", err })
       }
    } else {
-      res.status(404).json({ error: "only post request" })
+      res.status(404).json({ error: "post request only" })
    }
 }

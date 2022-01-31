@@ -2,11 +2,12 @@ import Image from "next/image"
 import Link from "next/link"
 import trancate from "../../utils/trancate"
 import { HiOutlineDotsHorizontal, HiOutlineShare } from "react-icons/hi"
+import moment from "moment"
 
 export default function CardVarient3({ post }) {
    return (
-      <div className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row ">
-         <div className="overflow-hidden img rounded-xl">
+      <div className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row max-w-sm sm:max-w-none mx-auto lg:mx-0 lg:w-fit">
+         <div className="overflow-hidden img rounded-xl max-w-sm ">
             <Image
                className="w-full rounded-xl transform group-hover:scale-110 transition duration-500"
                src={post.featuredImage.data.attributes.formats.thumbnail.url}
@@ -17,42 +18,44 @@ export default function CardVarient3({ post }) {
             />
          </div>
 
-         <div className="max-w-sm space-y-5">
-            {/* <div className="flex items-center text-xs sm:text-sm flex-wrap text-gray-500 dark:text-gray-300 space-x-2">
-               <Image
+         <div className="max-w-sm ">
+            <div className="flex items-center text-xs sm:text-sm flex-wrap text-gray-500 dark:text-gray-300 space-x-2">
+               {/* <Image
                   className="w-full rounded-full "
                   src={post.author.photo}
                   alt={post.author.name}
                   width={30}
                   height={30}
                   objectFit="cover"
-               />
+               /> */}
 
                <Link href="#3">
-                  <a className="hover:text-sky-500">{post.author.name}</a>
+                  <a className="hover:text-sky-500">JohnDoe</a>
                </Link>
 
                <span>&#8226;</span>
 
                <Link href="#4">
-                  <a className="hover:text-sky-500">{post.category}</a>
+                  <a className="hover:text-sky-500">{post.category?.data.attributes.name}</a>
                </Link>
 
                <span>&#8226;</span>
 
-               <span>{post.created_at}</span>
-            </div> */}
+               <span> {moment(post.publishedAt).format("DD MMM YYYY")}</span>
+            </div>
 
-            <div className="">
+            <div className="space-y-2 mb-4">
                <Link href="#4">
                   <a
                      title={post.title}
-                     className="font-bold text-lg sm:text-xl mb-2 group-hover:text-sky-500 transition duration-500"
+                     className="font-bold text-lg sm:text-xl group-hover:text-sky-500 transition duration-500"
                   >
-                     {trancate(post.title, 30)}
+                     {trancate(post.title, 50)}
                   </a>
                </Link>
-               <p className="text-gray-600 dark:text-gray-400 text-sm font-medium">{trancate(post.description, 100)}</p>
+               <p className="text-gray-600 min-h-[4rem] dark:text-gray-400 text-sm font-medium">
+                  {trancate(post.description, 150)}
+               </p>
             </div>
 
             <div className="flex items-center justify-between text-sm text-gray-500  dark:text-gray-300">

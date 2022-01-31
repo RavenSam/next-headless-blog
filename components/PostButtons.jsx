@@ -3,47 +3,54 @@ import { BsBookmark, BsBookmarkFill, BsHeart, BsHeartFill } from "react-icons/bs
 import ShareModal from "./ShareModal"
 import axios from "axios"
 import { useRouter } from "next/router"
-import { useQuery } from "react-query"
+import toast from "react-hot-toast"
 
-const getLikes = async ({ queryKey }) => {
-   const { postId } = queryKey[1]
-
-   const { data } = await axios(`${process.env.NEXT_PUBLIC_API_URL}/api/articles/${postId}?&fields=slug&populate=likes`)
-
-   return data
-}
-
-export default function PostButtons({ postId }) {
+export default function PostButtons({ postId, likes, bookmarks }) {
    const [likedPost, setLikedPost] = useState(false)
    const [bookmarkedPost, setBookmarkedPost] = useState(false)
 
    const router = useRouter()
 
-   const { isLoading, error, data, refetch } = useQuery(["likes", { postId }], getLikes)
-
    useEffect(() => {
       const user = JSON.parse(localStorage.getItem("user"))
-      const likesUsers = data.data.attributes.likes.data
-      const alreadyLikes = likesUsers.some((userLike) => userLike.id === user.id)
-      setLikedPost(alreadyLikes)
+
+      const alreadyLiked = likes.data.some((userLike) => userLike.id === user?.id)
+      setLikedPost(alreadyLiked)
+
+      const alreadyBookmarked = bookmarks.data.some((userLike) => userLike.id === user?.id)
+      setBookmarkedPost(alreadyBookmarked)
    }, [])
 
    const handleLiked = async () => {
       try {
          const user = JSON.parse(localStorage.getItem("user"))
 
-         const res = await axios.put("/api/likes", { postId, likes: data, user })
-         console.log(res)
+         if (user) {
+            const res = await axios.put("/api/likes", { postId, user })
 
-         setLikedPost(!likedPost)
-         refetch()
+            setLikedPost(!likedPost)
+         } else {
+            toast("Login To Like The Post", { className: "toast", duration: 4000 })
+         }
       } catch (err) {
          console.log(err)
       }
    }
 
-   const handleBookmark = () => {
-      setBookmarkedPost(!bookmarkedPost)
+   const handleBookmark = async () => {
+      try {
+         const user = JSON.parse(localStorage.getItem("user"))
+         if (user) {
+            const res = await axios.put("/api/bookmarks", { postId, user })
+            console.log(res)
+
+            setBookmarkedPost(!bookmarkedPost)
+         } else {
+            toast("Login To Bookmark The Post", { className: "toast", duration: 4000 })
+         }
+      } catch (err) {
+         console.log(err)
+      }
    }
 
    return (

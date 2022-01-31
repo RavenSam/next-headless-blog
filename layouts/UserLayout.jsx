@@ -52,7 +52,7 @@ export default function UserLayout({ children }) {
                   left: size.width > 768 ? (openNav ? 240 : 70) : menuDrawer ? 240 : 0,
                   width: size.width > 768 ? `calc(100% - ${openNav ? "240px" : "70px"})` : `100%`,
                }}
-               className={`relative  h-full  transition-all duration-300`}
+               className={`relative -z-10   h-full  transition-all duration-300`}
             >
                <header className="min-h-[2rem] ">
                   <button className="btn-icon md:hidden" onClick={handleMenuSM}>
