@@ -45,7 +45,7 @@ export default function CardVarient3({ post }) {
             </div>
 
             <div className="space-y-2 mb-4">
-               <Link href="#4">
+               <Link href={`/post/${post.slug}`}>
                   <a
                      title={post.title}
                      className="font-bold text-lg sm:text-xl group-hover:text-sky-500 transition duration-500"

@@ -9,14 +9,14 @@ const getBookmarks = async ({ queryKey }) => {
    const { userId } = queryKey[1]
 
    const { data } = await axios(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=likes&fields=title&fields=slug&fields=description&populate=featuredImage&populate=category`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/articles?filters[bookmarks]=${userId}&fields=title&fields=slug&fields=description&populate=featuredImage&populate=category`
    )
 
    return data
 }
 
-export default function Bookmarks() {
-   const { isLoading, error, data } = useQuery(["bookmarks", { userId: 8 }], getBookmarks)
+export default function Bookmarks({ user }) {
+   const { isLoading, error, data } = useQuery(["bookmarks", { userId: user.id }], getBookmarks)
 
    if (isLoading) return <Loading />
 

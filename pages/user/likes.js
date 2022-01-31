@@ -9,14 +9,14 @@ const getLikes = async ({ queryKey }) => {
    const { userId } = queryKey[1]
 
    const { data } = await axios(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/articles?populate=likes&fields=title&fields=slug&fields=description&populate=featuredImage&populate=category`
+      `${process.env.NEXT_PUBLIC_API_URL}/api/articles?filters[likes]=${userId}&fields=title&fields=slug&fields=description&populate=featuredImage&populate=category`
    )
 
    return data
 }
 
-export default function Likes() {
-   const { isLoading, error, data } = useQuery(["likes", { userId: 8 }], getLikes)
+export default function Likes({ user }) {
+   const { isLoading, error, data } = useQuery(["likes", { userId: user.id }], getLikes)
 
    if (isLoading) return <Loading />
 

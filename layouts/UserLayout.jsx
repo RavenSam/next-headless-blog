@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { BiMenu } from "react-icons/bi"
 import Loading from "../components/Loading"
+import React from "react"
 
 // Components
 import SideNav from "../components/UserLayout/SideNav"
@@ -32,7 +33,12 @@ export default function UserLayout({ children }) {
 
    useEffect(() => {
       const getUser = JSON.parse(localStorage.getItem("user"))
-      setUser(getUser)
+
+      if (getUser) {
+         setUser(getUser)
+      } else {
+         location.href = "/login"
+      }
    }, [])
 
    if (!user) return <Loading />
@@ -60,7 +66,7 @@ export default function UserLayout({ children }) {
                   </button>
                </header>
 
-               <main className="p-4">{children}</main>
+               <main className="p-4">{React.cloneElement(children, { user })}</main>
             </div>
          </div>
       </>
