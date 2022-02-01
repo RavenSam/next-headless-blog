@@ -3,6 +3,7 @@ import { useRouter } from "next/router"
 
 // Components
 import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 const pageWithNoNav = ["/login", "/signup", "/reset-password"]
 
@@ -19,6 +20,8 @@ export default function DefaultLayout({ children }) {
          {!pageWithNoNav.includes(pathname) && <Header />}
 
          <div className="">{children}</div>
+
+         {!pageWithNoNav.includes(pathname) && <Footer />}
       </>
    )
 }

@@ -1,12 +1,18 @@
 import moment from "moment"
 import Image from "next/image"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import trancate from "../../utils/trancate"
 
 export default function CardVarient2({ post }) {
+   const { push } = useRouter()
+
    return (
       <>
-         <div className="relative group block overflow-hidden rounded-xl bg-black">
+         <div
+            className="relative group block overflow-hidden rounded-xl bg-black cursor-pointer"
+            onClick={() => push(`/post/${post.slug}`)}
+         >
             <div className=" img w-full overflow-hidden rounded-xl ">
                <Image
                   className="w-full rounded-xl transform group-hover:scale-110 transition duration-500 "
@@ -37,7 +43,9 @@ export default function CardVarient2({ post }) {
                </div>
 
                <div className="flex items-center text-sm text-gray-300 space-x-2">
-                  {/* <Link href="#3"><a className="hover:text-sky-500">{post.author.name}</a></Link> */}
+                  <Link href="#3">
+                     <a className="hover:text-sky-500">JohnDoe</a>
+                  </Link>
 
                   <span>&#8226;</span>
 

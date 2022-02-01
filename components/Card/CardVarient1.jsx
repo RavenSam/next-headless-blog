@@ -32,17 +32,17 @@ export default function CardVarient1({ post }) {
                   width={40}
                   height={40}
                   objectFit="cover"
-               />
+               /> */}
                <Link href="#3">
-                  <a className="hover:text-sky-500">{post.author.name}</a>
-               </Link> */}
+                  <a className="hover:text-sky-500">JohnDoe</a>
+               </Link>
 
                <span>&#8226;</span>
 
                <span> {moment(post.publishedAt).format("DD MMM YYYY")}</span>
             </div>
 
-            <div className="py-4">
+            <div className="py-2 space-y-2">
                <Link href={`/post/${post.slug}`}>
                   <a
                      title={post.title}
