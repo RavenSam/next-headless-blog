@@ -9,7 +9,7 @@ import React from "react"
 import SideNav from "../components/UserLayout/SideNav"
 import useWindowSize from "../utils/useWindowSize"
 
-export default function UserLayout({ children }) {
+export default function UserLayout({ children, site }) {
    const { pathname } = useRouter()
    const [user, setUser] = useState(null)
    const [openNav, setOpenNav] = useState(true)
@@ -46,19 +46,20 @@ export default function UserLayout({ children }) {
    return (
       <>
          <Head>
-            <title>Admin - SiSky</title>
-            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+            <title>Admin - {site.attributes.Name}</title>
          </Head>
 
          <div style={{ overflow: "hidden " }}>
-            <SideNav openNav={openNav} setOpenNav={setOpenNav} menuDrawer={menuDrawer} user={user} />
+            <div className="relative z-10">
+               <SideNav site={site} openNav={openNav} setOpenNav={setOpenNav} menuDrawer={menuDrawer} user={user} />
+            </div>
 
             <div
                style={{
                   left: size.width > 768 ? (openNav ? 240 : 70) : menuDrawer ? 240 : 0,
                   width: size.width > 768 ? `calc(100% - ${openNav ? "240px" : "70px"})` : `100%`,
                }}
-               className={`relative -z-10   h-full  transition-all duration-300`}
+               className="relative h-full  transition-all duration-300"
             >
                <header className="min-h-[2rem] ">
                   <button className="btn-icon md:hidden" onClick={handleMenuSM}>
@@ -66,7 +67,7 @@ export default function UserLayout({ children }) {
                   </button>
                </header>
 
-               <main className="p-4">{React.cloneElement(children, { user })}</main>
+               <main className="p-4 ">{React.cloneElement(children, { user, site })}</main>
             </div>
          </div>
       </>

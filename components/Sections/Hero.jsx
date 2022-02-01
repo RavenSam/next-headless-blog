@@ -5,7 +5,7 @@ export default function Hero({ articles }) {
    return (
       <div>
          <div className="relative h-[60vh] md:h-[90vh]">
-            <Image src="/hero.jpg" alt="hero" layout="fill" objectFit="cover" width={800} height={500} />
+            <Image src="/hero.jpg" alt="hero" layout="fill" objectFit="cover" />
 
             <div className="absolute inset-0 bg-black bg-opacity-70" />
 

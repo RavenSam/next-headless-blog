@@ -13,7 +13,7 @@ const navLists = [
    { title: "contact", href: "/contact" },
 ]
 
-export default function Header() {
+export default function Header({ site }) {
    const { theme } = useTheme()
    const [user, setUser] = useState(null)
 
@@ -29,7 +29,11 @@ export default function Header() {
                <a className="img overflow-hidden">
                   <Image
                      className="w-full"
-                     src={theme === "dark" ? "/logo-white.png" : "/logo-dark.png"}
+                     src={
+                        theme === "dark"
+                           ? site.attributes.Dark_logo.data.attributes.url
+                           : site.attributes.Light_logo.data.attributes.url
+                     }
                      alt="logo"
                      width={80}
                      height={40}

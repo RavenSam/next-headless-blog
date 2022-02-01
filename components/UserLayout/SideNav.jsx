@@ -15,17 +15,18 @@ import ThemeToggle from "../ThemeToggle"
 import trancate from "../../utils/trancate"
 import { useRouter } from "next/router"
 import Link from "next/link"
+import { useTheme } from "next-themes"
 
 const navLinks = [
-   { name: "dashboard", icon: BiGridAlt, href: "/user/dashboard" },
-   { name: "user", icon: BiUser, href: "/user" },
+   { name: "dashboard", icon: BiGridAlt, href: "/user" },
    { name: "likes", icon: BiHeart, href: "/user/likes" },
    { name: "history", icon: BiHistory, href: "/user/history" },
    { name: "bookmarks", icon: BiBookmark, href: "/user/bookmarks" },
    { name: "settings", icon: BiCog, href: "/user/settings" },
 ]
 
-export default function SideNav({ openNav, setOpenNav, menuDrawer, user }) {
+export default function SideNav({ openNav, setOpenNav, menuDrawer, user, site }) {
+   const { theme } = useTheme()
    const { pathname } = useRouter()
 
    return (
@@ -41,8 +42,22 @@ export default function SideNav({ openNav, setOpenNav, menuDrawer, user }) {
                      !openNav && "pointer-events-none opacity-0"
                   }`}
                >
-                  <BiPlusMedical fontSize={28} className="" />
-                  <span className="logo_name  text-xl ">SiSky</span>
+                  <Link href="/">
+                     <a className="img overflow-hidden">
+                        <Image
+                           className="w-full"
+                           src={
+                              theme === "dark"
+                                 ? site.attributes.Dark_logo.data.attributes.url
+                                 : site.attributes.Light_logo.data.attributes.url
+                           }
+                           alt="logo"
+                           width={70}
+                           height={30}
+                           objectFit="contain"
+                        />
+                     </a>
+                  </Link>
                </div>
 
                <button

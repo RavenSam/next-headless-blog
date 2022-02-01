@@ -1,5 +1,5 @@
-import Head from "next/head"
 import { useRouter } from "next/router"
+import React from "react"
 
 // Components
 import Header from "../components/Header"
@@ -7,19 +7,14 @@ import Footer from "../components/Footer"
 
 const pageWithNoNav = ["/login", "/signup", "/reset-password"]
 
-export default function DefaultLayout({ children }) {
+export default function DefaultLayout({ children, site }) {
    const { pathname } = useRouter()
 
    return (
       <>
-         <Head>
-            <title>SiSky</title>
-            <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-         </Head>
+         {!pageWithNoNav.includes(pathname) && <Header site={site} />}
 
-         {!pageWithNoNav.includes(pathname) && <Header />}
-
-         <div className="">{children}</div>
+         <main className="">{React.cloneElement(children, { site })}</main>
 
          {!pageWithNoNav.includes(pathname) && <Footer />}
       </>

@@ -1,6 +1,5 @@
 import { useRef } from "react"
-import { BsShareFill } from "react-icons/bs"
-import { IoMdCopy } from "react-icons/io"
+import { BsShareFill, BsLink } from "react-icons/bs"
 import Modal from "./shared/Modal"
 import {
    FacebookIcon,
@@ -19,7 +18,7 @@ import {
 import toast from "react-hot-toast"
 
 const btnIcons = [
-   { btn: CopyButton, icon: IoMdCopy },
+   { btn: CopyButton, icon: BsLink },
    { btn: FacebookShareButton, icon: FacebookIcon },
    { btn: TwitterShareButton, icon: TwitterIcon },
    { btn: RedditShareButton, icon: RedditIcon },

@@ -9,7 +9,7 @@ import PostComments from "../../components/PostComments"
 import Meta from "../../components/Meta"
 import PostButtons from "../../components/PostButtons"
 
-export default function Post({ data }) {
+export default function Post({ data, site }) {
    const router = useRouter()
 
    if (router.isFallback) {
@@ -22,7 +22,7 @@ export default function Post({ data }) {
 
    return (
       <>
-         <Meta data={data} />
+         <Meta data={data} site={site} />
 
          <div className="sm:p-2">
             <div className="relative overflow-hidden sm:rounded-xl">
