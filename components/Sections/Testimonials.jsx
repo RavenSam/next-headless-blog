@@ -1,29 +1,10 @@
 import Image from "next/image"
 import React from "react"
 
-const testimonials = [
-   {
-      name: "Sara Doe",
-      img: "/images/user-1.jpg",
-      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, facilis?",
-   },
-   {
-      name: "John Doe",
-      img: "/images/user.jpg",
-      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, facilis?",
-   },
-
-   {
-      name: "Eric Doe",
-      img: "/images/user-3.jpg",
-      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, facilis?",
-   },
-]
-
 export default function Testimonials() {
    return (
       <div className="xlContainer p-2 my-8">
-         <h2 className="text-xl lg:text-2xl font-bold py-4 text-center mb-16">
+         <h2 className="text-xl lg:text-2xl font-bold py-4 text-center mb-10 md:mb-20">
             Testimonials<span className="text-sky-500 text-4xl">.</span>
          </h2>
 
@@ -54,8 +35,27 @@ function Testimonial({ testimonial, i }) {
 
          <div className="space-y-3">
             <h3 className="font-bold text-base">{testimonial.name}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">{testimonial.msg}</p>
+            <p className="text-sm text-gray-600 dark:text-gray-400 max-w-sm">{testimonial.msg}</p>
          </div>
       </div>
    )
 }
+
+const testimonials = [
+   {
+      name: "Sara Doe",
+      img: "/images/user-1.jpg",
+      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, facilis?",
+   },
+   {
+      name: "Emma Doe",
+      img: "/images/user-4.jpg",
+      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, facilis?",
+   },
+
+   {
+      name: "Eric Doe",
+      img: "/images/user-3.jpg",
+      msg: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatem, facilis?",
+   },
+]

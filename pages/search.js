@@ -60,7 +60,10 @@ export default function Search({ researchData }) {
                      onChange={(e) => setSearchValue(e.target.value)}
                   />
 
-                  <button className="text-sky-500 h-full btn px-4  rounded-r-xl absolute top-1/2 right-0 transform  -translate-y-1/2 ">
+                  <button
+                     className="text-sky-500 h-full btn px-4  rounded-r-xl absolute top-1/2 right-0 transform  -translate-y-1/2 "
+                     aria-label="Search"
+                  >
                      <HiOutlineSearch size={20} />
                   </button>
                </form>

@@ -4,7 +4,7 @@ import Card from "../Card"
 export default function Hero({ articles }) {
    return (
       <div>
-         <div className="relative h-[60vh] md:h-[90vh]">
+         <div className="relative h-[60vh] md:h-[90vh] mx-h-[615px]">
             <Image src="/hero.jpg" alt="hero" layout="fill" objectFit="cover" />
 
             <div className="absolute inset-0 bg-black bg-opacity-70" />

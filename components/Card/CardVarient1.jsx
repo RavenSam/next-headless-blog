@@ -24,7 +24,7 @@ export default function CardVarient1({ post }) {
                </Link>
             </div>
 
-            <div className="flex items-center text-sm mt-4 text-gray-500 dark:text-gray-300 space-x-2">
+            <div className="flex items-center text-sm mt-4 text-gray-600 dark:text-gray-300 space-x-2">
                {/* <Image
                   className="w-full rounded-full"
                   src={post.author.photo}

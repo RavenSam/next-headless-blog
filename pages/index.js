@@ -12,11 +12,11 @@ export default function Home({ hotArticles, site }) {
             <Hero articles={hotArticles} />
          </section>
 
-         <section className="mt-36">
+         <section className="mt-52">
             <Recommended articles={hotArticles} />
          </section>
 
-         <section className="mt-36">
+         <section className="mt-52">
             <Testimonials />
          </section>
       </>

@@ -8,8 +8,7 @@ import { useEffect, useState } from "react"
 
 const navLists = [
    { title: "home", href: "/" },
-   { title: "archive", href: "/archive" },
-   { title: "about us", href: "/about" },
+   { title: "blog", href: "/archive" },
    { title: "contact", href: "/contact" },
 ]
 
