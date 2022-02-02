@@ -24,7 +24,7 @@ export default function Dropdown({ title, children, round, img }) {
                   />
                </Menu.Button>
             ) : (
-               <Menu.Button className="btn-icon text-sm">
+               <Menu.Button aria-label="Avatar" className="btn-icon text-sm">
                   <HiOutlineUser size={20} aria-hidden="true" />
                </Menu.Button>
             )}
