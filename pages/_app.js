@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import { NextSeo } from "next-seo"
+import { useTransition, animated } from "react-spring"
 
 // Styles
 import "../styles/globals.css"
@@ -13,8 +14,15 @@ import DefaultLayout from "../layouts/DefaultLayout"
 
 const queryClient = new QueryClient()
 
-export default function MyApp({ Component, pageProps, site }) {
+export default function MyApp({ Component, pageProps, site, router }) {
    const Layout = Component.layout || DefaultLayout
+
+   const transitions = useTransition(router.route, {
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0, display: "none" },
+      config: { duration: 1000 },
+   })
 
    return (
       <>
@@ -24,10 +32,7 @@ export default function MyApp({ Component, pageProps, site }) {
 
          <NextSeo
             defaultTitle={site.attributes.Name}
-            openGraph={{
-               type: "website",
-               site_name: site.attributes.Name,
-            }}
+            openGraph={{ type: "website", site_name: site.attributes.Name }}
          />
 
          <ThemeProvider attribute="class">
@@ -35,9 +40,13 @@ export default function MyApp({ Component, pageProps, site }) {
             <Toaster />
 
             <QueryClientProvider client={queryClient}>
-               <Layout site={site}>
-                  <Component {...pageProps} />
-               </Layout>
+               {transitions((style) => (
+                  <animated.div style={style}>
+                     <Layout site={site}>
+                        <Component {...pageProps} />
+                     </Layout>
+                  </animated.div>
+               ))}
             </QueryClientProvider>
          </ThemeProvider>
       </>
