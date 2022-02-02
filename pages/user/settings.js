@@ -4,6 +4,7 @@ import UserLayout from "../../layouts/UserLayout"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
+import { NextSeo } from "next-seo"
 
 const inputs = [
    { name: "email", label: "your email", type: "email", icon: BsEnvelope },
@@ -24,7 +25,12 @@ export default function Settings() {
    }
 
    return (
-      <div>
+      <>
+         <NextSeo
+            title="Your Settings"
+            description="Your Settings | change your settings and make yourself more unique"
+         />
+
          <div className="relative rounded-xl shadow px-5 py-8 md:p-10 bg-white dark:bg-gray-900">
             <h1 className="text-xl md:text-2xl font-bold">Settings</h1>
          </div>
@@ -70,7 +76,7 @@ export default function Settings() {
                </form>
             </div>
          </div>
-      </div>
+      </>
    )
 }
 

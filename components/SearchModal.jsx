@@ -1,16 +1,17 @@
 import { useRef, useState } from "react"
 import { HiOutlineSearch } from "react-icons/hi"
 import Modal from "./shared/Modal"
+import { useRouter } from "next/router"
 
 export default function SearchModal() {
    const [searchValue, setSearchValue] = useState("")
-
+   const { push } = useRouter()
    const searchRef = useRef()
 
    const handleSubmit = (e) => {
       e.preventDefault()
 
-      alert(searchValue)
+      push({ pathname: "/search", query: { q: searchValue } })
    }
    return (
       <>

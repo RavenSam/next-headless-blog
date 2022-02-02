@@ -3,10 +3,16 @@ import Link from "next/link"
 import trancate from "../../utils/trancate"
 import { HiOutlineDotsHorizontal, HiOutlineShare } from "react-icons/hi"
 import moment from "moment"
+import { useRouter } from "next/router"
 
 export default function CardVarient3({ post }) {
+   const { push } = useRouter()
+
    return (
-      <div className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row max-w-sm sm:max-w-none mx-auto lg:mx-0 lg:w-fit">
+      <div
+         className="group flex flex-col space-y-4 sm:space-y-0 sm:space-x-4 sm:flex-row max-w-sm sm:max-w-none mx-auto lg:mx-0 lg:w-fit cursor-pointer"
+         onClick={() => push(`/post/${post.slug}`)}
+      >
          <div className="overflow-hidden img rounded-xl max-w-sm ">
             <Image
                className="w-full rounded-xl transform group-hover:scale-110 transition duration-500"

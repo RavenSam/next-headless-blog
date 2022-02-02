@@ -44,7 +44,7 @@
    }
 
    .input {
-      @apply bg-gray-50 dark:bg-gray-800 dark:text-white border  block w-full p-2.5 border-gray-500 text-gray-900 text-sm rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-300;
+      @apply bg-gray-50 dark:bg-gray-800 dark:text-white border  block w-full p-2.5 border-gray-400  dark:border-gray-700 text-gray-900 text-sm rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none  focus:border-sky-500 focus:ring-1 focus:ring-sky-300;
    }
 
    .xlContainer {

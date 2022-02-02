@@ -4,6 +4,7 @@ import UserLayout from "../../layouts/UserLayout"
 import Card from "../../components/Card"
 import { isEmpty } from "lodash"
 import Loading from "../../components/Loading"
+import { NextSeo } from "next-seo"
 
 const getLikes = async ({ queryKey }) => {
    const { userId } = queryKey[1]
@@ -28,14 +29,15 @@ export default function Likes({ user }) {
       )
 
    return (
-      <div>
+      <>
+         <NextSeo title="Your Liked Posts" description="Your Liked Posts | see all the posts that you've liked" />
          <div className="relative rounded-xl shadow px-5 py-8 md:p-10 bg-white dark:bg-gray-900">
             <h1 className="text-2xl md:text-3xl font-bold">Likes</h1>
          </div>
 
          {!isEmpty(data.data) ? (
             <div className="w-full py-7 lg:px-8">
-               <h2 className="text-1xl md:text-2xl font-medium py-6 capitalize">
+               <h2 className="text-xl md:text-2xl font-medium py-6 capitalize">
                   All The Posts That you <span className="text-sky-500 font-semibold">Liked</span>
                </h2>
                <div className="space-y-8">
@@ -52,7 +54,7 @@ export default function Likes({ user }) {
                Posts
             </h2>
          )}
-      </div>
+      </>
    )
 }
 Likes.layout = UserLayout

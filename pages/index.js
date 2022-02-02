@@ -1,10 +1,13 @@
+import { NextSeo } from "next-seo"
 import Hero from "../components/Sections/Hero"
 import Recommended from "../components/Sections/Recommended"
 import Testimonials from "../components/Sections/Testimonials"
 
-export default function Home({ hotArticles }) {
+export default function Home({ hotArticles, site }) {
    return (
       <>
+         <NextSeo title="Home Page" description="Homepage | have fun discovering new posts" />
+
          <section>
             <Hero articles={hotArticles} />
          </section>
