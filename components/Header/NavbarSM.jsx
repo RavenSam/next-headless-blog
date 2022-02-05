@@ -6,6 +6,7 @@ import trancate from "../../utils/trancate"
 import { useRouter } from "next/router"
 import { HiOutlineCog, HiOutlineLogout } from "react-icons/hi"
 import logout from "../../lib/logout"
+import Avatar from "react-avatar"
 
 export default function NavbarSM({ navLists, user }) {
    const { pathname, push } = useRouter()
@@ -15,16 +16,15 @@ export default function NavbarSM({ navLists, user }) {
          <div className="h-full flex flex-col space-y-6">
             {user ? (
                <div className="group flex items-center  space-x-4 cursor-pointer" onClick={() => push("/user")}>
-                  <div className="relative img">
-                     <Image
-                        className="w-full rounded-full "
-                        src="/images/user.jpg"
-                        alt="Jon Doe"
-                        width={70}
-                        height={70}
-                        objectFit="cover"
-                     />
-                  </div>
+                  <Avatar
+                     name={user.username}
+                     src={user.photo}
+                     email={user.email}
+                     maxInitials={2}
+                     size="70"
+                     round={true}
+                     className="!leading-[75px]"
+                  />
 
                   <div className="max-w-sm space-y-1">
                      <h2 title={user.username} className="font-bold text-lg mb-2 text-sky-500 transition duration-500">

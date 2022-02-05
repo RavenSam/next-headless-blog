@@ -16,11 +16,11 @@ import trancate from "../../utils/trancate"
 import { useRouter } from "next/router"
 import Link from "next/link"
 import { useTheme } from "next-themes"
+import Avatar from "react-avatar"
 
 const navLinks = [
    { name: "dashboard", icon: BiGridAlt, href: "/user" },
    { name: "likes", icon: BiHeart, href: "/user/likes" },
-   { name: "history", icon: BiHistory, href: "/user/history" },
    { name: "bookmarks", icon: BiBookmark, href: "/user/bookmarks" },
    { name: "settings", icon: BiCog, href: "/user/settings" },
 ]
@@ -102,16 +102,15 @@ export default function SideNav({ openNav, setOpenNav, menuDrawer, user, site })
                )}
 
                <div className="group flex items-center  space-x-4 ">
-                  <div className="relative img min-w-[45px]">
-                     <Image
-                        className="w-full rounded-full "
-                        src="/images/user.jpg"
-                        alt="Jon Doe"
-                        width={45}
-                        height={45}
-                        objectFit="cover"
-                     />
-                  </div>
+                  <Avatar
+                     name={user.username}
+                     src={user.photo}
+                     email={user.email}
+                     maxInitials={2}
+                     size="45"
+                     round={true}
+                     className="!leading-[50px]"
+                  />
                   {openNav && (
                      <div className="max-w-sm space-y-1">
                         <h2 title={user.username} className="font-bold text-sm text-sky-500 transition duration-500">

@@ -4,17 +4,25 @@ import { useEffect, useState } from "react"
 import { BiMenu } from "react-icons/bi"
 import Loading from "../components/Loading"
 import React from "react"
+import { useTransition, animated } from "react-spring"
 
 // Components
 import SideNav from "../components/UserLayout/SideNav"
 import useWindowSize from "../utils/useWindowSize"
 
 export default function UserLayout({ children, site }) {
-   const { pathname } = useRouter()
+   const { pathname, route } = useRouter()
    const [user, setUser] = useState(null)
    const [openNav, setOpenNav] = useState(true)
    const [menuDrawer, setMenuDrawer] = useState(false)
    const size = useWindowSize()
+
+   const transitions = useTransition(route, {
+      from: { opacity: 0 },
+      enter: { opacity: 1 },
+      leave: { opacity: 0, display: "none" },
+      config: { duration: 800 },
+   })
 
    const handleMenuSM = () => {
       setOpenNav(true)
@@ -67,7 +75,11 @@ export default function UserLayout({ children, site }) {
                   </button>
                </header>
 
-               <main className="p-4 ">{React.cloneElement(children, { user, site })}</main>
+               {transitions((style) => (
+                  <animated.div style={style}>
+                     <main className="p-4 ">{React.cloneElement(children, { user, site })}</main>
+                  </animated.div>
+               ))}
             </div>
          </div>
       </>

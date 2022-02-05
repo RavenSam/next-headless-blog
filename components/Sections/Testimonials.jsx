@@ -4,7 +4,7 @@ import React from "react"
 export default function Testimonials() {
    return (
       <div className="xlContainer p-2 my-8">
-         <h2 className="text-xl lg:text-2xl font-bold py-4 text-center mb-10 md:mb-20">
+         <h2 data-aos="fade-up" className="text-xl lg:text-2xl font-bold py-4 text-center mb-10 md:mb-20">
             Testimonials<span className="text-sky-500 text-4xl">.</span>
          </h2>
 
@@ -21,7 +21,11 @@ export default function Testimonials() {
 
 function Testimonial({ testimonial, i }) {
    return (
-      <div className={`flex flex-col items-center  text-center space-y-4 ${i === 1 && "md:-mt-10"}`}>
+      <div
+         data-aos="fade-up"
+         data-aos-delay={i * 400 + 100}
+         className={`flex flex-col items-center  text-center space-y-4 ${i === 1 && "md:-mt-10"}`}
+      >
          <div className={`relative img w-[70px]  ${i === 1 && "md:w-[100px]"}`}>
             <Image
                className="w-full rounded-full"

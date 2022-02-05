@@ -4,25 +4,24 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import { Toaster } from "react-hot-toast"
 import Head from "next/head"
 import { NextSeo } from "next-seo"
-import { useTransition, animated } from "react-spring"
+import Aos from "aos"
 
 // Styles
 import "../styles/globals.css"
+import "aos/dist/aos.css"
 
 // Layouts
 import DefaultLayout from "../layouts/DefaultLayout"
+import { useEffect } from "react"
 
 const queryClient = new QueryClient()
 
-export default function MyApp({ Component, pageProps, site, router }) {
+export default function MyApp({ Component, pageProps, site }) {
    const Layout = Component.layout || DefaultLayout
 
-   const transitions = useTransition(router.route, {
-      from: { opacity: 0 },
-      enter: { opacity: 1 },
-      leave: { opacity: 0, display: "none" },
-      config: { duration: 1000 },
-   })
+   useEffect(() => {
+      Aos.init({ duration: 1000 })
+   }, [])
 
    return (
       <>
@@ -40,13 +39,9 @@ export default function MyApp({ Component, pageProps, site, router }) {
             <Toaster />
 
             <QueryClientProvider client={queryClient}>
-               {transitions((style) => (
-                  <animated.div style={style}>
-                     <Layout site={site}>
-                        <Component {...pageProps} />
-                     </Layout>
-                  </animated.div>
-               ))}
+               <Layout site={site}>
+                  <Component {...pageProps} />
+               </Layout>
             </QueryClientProvider>
          </ThemeProvider>
       </>

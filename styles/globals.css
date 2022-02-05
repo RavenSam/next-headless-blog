@@ -12,3 +12,8 @@ body {
 .img span {
    display: block !important;
 }
+
+.sb-avatar__text > div {
+   font-size: 20px !important;
+   font-weight: 700;
+}

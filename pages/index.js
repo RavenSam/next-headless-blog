@@ -1,5 +1,6 @@
 import { NextSeo } from "next-seo"
 import Hero from "../components/Sections/Hero"
+import Newsletter from "../components/Sections/Newsletter"
 import Recommended from "../components/Sections/Recommended"
 import Testimonials from "../components/Sections/Testimonials"
 
@@ -14,6 +15,10 @@ export default function Home({ hotArticles, site }) {
 
          <section className="mt-52">
             <Recommended articles={hotArticles} />
+         </section>
+
+         <section className="mt-52">
+            <Newsletter />
          </section>
 
          <section className="mt-52">

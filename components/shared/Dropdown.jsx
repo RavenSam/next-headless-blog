@@ -1,9 +1,9 @@
 import { Menu, Transition } from "@headlessui/react"
-import Image from "next/image"
 import { Fragment } from "react"
+import Avatar from "react-avatar"
 import { HiChevronDown, HiOutlineUser } from "react-icons/hi"
 
-export default function Dropdown({ title, children, round, img }) {
+export default function Dropdown({ title, children, round, user }) {
    return (
       <div className="">
          <Menu as="div" className="relative inline-block text-left">
@@ -12,15 +12,16 @@ export default function Dropdown({ title, children, round, img }) {
                   {title && "Options"}
                   <HiChevronDown size={20} aria-hidden="true" />
                </Menu.Button>
-            ) : img ? (
+            ) : user ? (
                <Menu.Button className="relative img focus:ring-2 focus:outline-none focus:ring-sky-500 rounded-full">
-                  <Image
-                     className="w-full rounded-full "
-                     src={img}
-                     alt="Jon Doe"
-                     width={45}
-                     height={45}
-                     objectFit="cover"
+                  <Avatar
+                     name={user.username}
+                     src={user.photo}
+                     email={user.email}
+                     maxInitials={2}
+                     size="45"
+                     round={true}
+                     className="!leading-[50px]"
                   />
                </Menu.Button>
             ) : (

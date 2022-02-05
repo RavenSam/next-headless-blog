@@ -22,19 +22,21 @@ export default function NavbarMD({ navLists, user }) {
          <SearchModal />
 
          {user ? (
-            <Dropdown round img="/images/user.jpg">
+            <Dropdown round user={user}>
                <div className="p-1 flex flex-col text-sm space-y-1">
                   <Link href="/user">
                      <a className="btn-ghost ">profile</a>
+                  </Link>
+
+                  <Link href="/user/bookmarks">
+                     <a className="btn-ghost ">bookmarks</a>
                   </Link>
 
                   <Link href="/user/settings">
                      <a className="btn-ghost ">settings</a>
                   </Link>
 
-                  <Link href="/user/help">
-                     <a className="btn-ghost ">help</a>
-                  </Link>
+                  <hr className="dark:border-gray-700" />
 
                   <div className="flex items-center justify-evenly ">
                      <ThemeToggle />

@@ -5,6 +5,8 @@ import Card from "../../components/Card"
 import { isEmpty } from "lodash"
 import Loading from "../../components/Loading"
 import { NextSeo } from "next-seo"
+import { useEffect, useState } from "react"
+import { useTransition, animated } from "react-spring"
 
 const getBookmarks = async ({ queryKey }) => {
    const { userId } = queryKey[1]
@@ -16,8 +18,32 @@ const getBookmarks = async ({ queryKey }) => {
    return data
 }
 
-export default function Bookmarks({ user }) {
-   const { isLoading, error, data } = useQuery(["bookmarks", { userId: user.id }], getBookmarks)
+export default function Bookmarks({ user = {} }) {
+   const [skip, setSkip] = useState(false)
+   const [items, setItems] = useState([])
+
+   const { isLoading, error, data } = useQuery(["bookmarks", { userId: user.id }], getBookmarks, { skip })
+
+   const transitions = useTransition(items, {
+      from: { opacity: 0, y: 200 },
+      enter: (item) => async (next) => {
+         await next({ opacity: 1, x: 0, y: 0, delay: item.delay })
+      },
+      leave: { opacity: 0 },
+   })
+
+   useEffect(() => {
+      // check whether data exists
+      if (!isLoading && !!data) {
+         setSkip(true)
+
+         const postItems = data?.data.map((x, i) => {
+            return { ...x, delay: 100 + i * 300 }
+         })
+
+         setItems(postItems)
+      }
+   }, [data, isLoading])
 
    if (isLoading) return <Loading />
 
@@ -43,12 +69,18 @@ export default function Bookmarks({ user }) {
                <h2 className="text-xl md:text-2xl font-medium py-6 capitalize">
                   All The Posts That you <span className="text-sky-500 font-semibold">Bookmarked</span>
                </h2>
+
                <div className="space-y-8">
-                  {data.data.map((post) => (
-                     <div key={post.id} className="">
-                        <Card varient={3} post={post.attributes} />
-                     </div>
-                  ))}
+                  {transitions(
+                     (style, item) =>
+                        item && (
+                           <animated.div style={style}>
+                              <div className="">
+                                 <Card varient={3} post={item.attributes} />
+                              </div>
+                           </animated.div>
+                        )
+                  )}
                </div>
             </div>
          ) : (
